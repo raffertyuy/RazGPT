@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orchestrator", "Orchestrator\Orchestrator.csproj", "{CF02A5E8-FF80-4263-918B-F3E9D9513474}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orchestrator.NativeSkills", "Orchestrator.NativeSkills\Orchestrator.NativeSkills.csproj", "{EE7BA58F-19E3-44B4-88FB-A53F1B2B0632}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF02A5E8-FF80-4263-918B-F3E9D9513474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF02A5E8-FF80-4263-918B-F3E9D9513474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF02A5E8-FF80-4263-918B-F3E9D9513474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF02A5E8-FF80-4263-918B-F3E9D9513474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE7BA58F-19E3-44B4-88FB-A53F1B2B0632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE7BA58F-19E3-44B4-88FB-A53F1B2B0632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE7BA58F-19E3-44B4-88FB-A53F1B2B0632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE7BA58F-19E3-44B4-88FB-A53F1B2B0632}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B1DF167A-86E8-42EE-AC11-E1E9237F9C92}
+	EndGlobalSection
+EndGlobal
