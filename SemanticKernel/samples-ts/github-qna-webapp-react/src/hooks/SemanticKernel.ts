@@ -41,6 +41,16 @@ export class SemanticKernel {
         return result;
     };
 
+    public createPlanAsync = async (keyConfig: IKeyConfig, ask: IAsk): Promise<IAskResult> => {
+        const result = await this.getResponseAsync<IAskResult>({
+            commandPath: `/api/planner/createplan`,
+            method: 'POST',
+            body: ask,
+            keyConfig: keyConfig,
+        });
+        return result;
+    };
+
     public executePlanAsync = async (keyConfig: IKeyConfig, ask: IAsk, maxSteps: number = 10): Promise<IAskResult> => {
         const result = await this.getResponseAsync<IAskResult>({
             commandPath: `/api/planner/execute/${maxSteps}`,
@@ -83,15 +93,16 @@ export class SemanticKernel {
 
             if (!response.ok) {
                 // eslint-disable-next-line no-throw-literal
-                throw response.statusText + " => " + await response.text();
+                throw response.statusText + ' => ' + (await response.text());
             }
 
             return (await response.json()) as T;
         } catch (e) {
-            var additional_error_msg = ''
+            var additional_error_msg = '';
             if (e instanceof TypeError) {
                 // fetch() will reject with a TypeError when a network error is encountered.
-                additional_error_msg = '\n\nPlease check you have the function running and that it is accessible by the app'
+                additional_error_msg =
+                    '\n\nPlease check you have the function running and that it is accessible by the app';
             }
             // eslint-disable-next-line no-throw-literal
             throw e + additional_error_msg;
