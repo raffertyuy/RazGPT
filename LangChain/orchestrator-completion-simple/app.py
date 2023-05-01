@@ -14,11 +14,6 @@ import Prompts
 # Load Environment Variables
 load_dotenv()
 
-CHAT_API_VERSION = os.environ.get("OPENAI_CHAT_API_VERSION", "2023-03-15-preview")
-CHAT_DEPLOYMENT = os.environ.get("OPENAI_CHAT_DEPLOYMENT", "gpt35")
-CHAT_TEMPERATURE = float(os.environ.get("OPENAI_CHAT_TEMPERATURE", "0.3"))
-CHAT_RESPONSE_MAX_TOKENS = int(os.environ.get("OPENAI_CHAT_RESPONSE_MAX_TOKENS", "300"))
-
 COMPLETION_MODEL = os.environ.get("OPENAI_COMPLETION_MODEL", "text-davinci-003")
 COMPLETION_DEPLOYMENT = os.environ.get("OPENAI_COMPLETION_DEPLOYMENT", "davinci")
 SUMMARY_TEMPERATURE = float(os.environ.get("SUMMARY_TEMPERATURE", "0.3"))
@@ -38,7 +33,7 @@ llm = AzureOpenAI(
 conv_memory = ConversationBufferWindowMemory(
     memory_key="chat_history_lines",
     input_key="input",
-    k=3
+    k=NUM_CONVERSATION_MEMORY
 )
 summary_memory = ConversationSummaryMemory(
     llm=llm,
@@ -49,7 +44,7 @@ memory = CombinedMemory(memories=[conv_memory, summary_memory])
 # create conversation chain
 prompt = PromptTemplate(
     input_variables=["history", "input", "chat_history_lines"],
-    template=Prompts.COMPLETION_TEMPLATE
+    template=Prompts.DEFAULT_TEMPLATE
 )
 
 conversation = ConversationChain(
