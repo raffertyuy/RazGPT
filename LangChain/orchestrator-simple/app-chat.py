@@ -85,30 +85,10 @@ def chat():
     with get_openai_callback() as cb:
         response = conversation.predict(input=message)
         total_tokens = cb.total_tokens
-        chat_history = conversation.memory.load_memory_variables({})["history"]
-        
-        transformed_history = []
-        for message in chat_history:
-            if isinstance(message, SystemMessage):
-                transformed_history.append({
-                    "role": "system",
-                    "content": message.content
-                })
-            elif isinstance(message, HumanMessage):
-                transformed_history.append({
-                    "role": "user",
-                    "content": message.content
-                })
-            elif isinstance(message, AIMessage):
-                transformed_history.append({
-                    "role": "assistant",
-                    "content": message.content
-                })
 
         return jsonify({
             "response": response,
-            "total_tokens": total_tokens,
-            "chat_history": json.dumps(transformed_history)
+            "total_tokens": total_tokens
         })
 
 if __name__ == '__main__':
