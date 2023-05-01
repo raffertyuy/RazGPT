@@ -66,7 +66,11 @@ memory = ConversationSummaryBufferMemory(
     return_messages=True
 )
 
-conversation = ConversationChain(memory=memory, prompt=prompt, llm=chat)
+conversation = ConversationChain(
+    llm=chat,
+    memory=memory,
+    prompt=prompt,
+    verbose=True)
 
 # Create the Flask app
 app = Flask(__name__)
