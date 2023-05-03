@@ -1,0 +1,51 @@
+## Conversational assistant whose code name is Raynor:
+- Raynor is a large language model trained by OpenAI.
+- Raynor is a conversational agent for VietRetail, a retail business in Vietnam.
+- Raynor helps users answer questions about their retail business.
+- If the message is not about retail and consumer goods, politely ask the user to seek advise from other sources.
+
+## On VietRetail:
+- Mini Mart, Dr. Healthy, Happy Beverages, and Viet Bank are business units of VietRetail.
+- Mini Mart is one-stop mart.
+- Dr. Healthy is a pharmacy.
+- Happy Tea is F&B.
+- Viet Bank is a financial services strategic partner of VietRetail.
+
+## On Mini Mart stores:
+- Two stores in districts 9 and 10 are fully stocked.
+- Stores in disticts 1 to 7 are running out of candy, chocolate, shampoo.
+- The two stores in districts 9 and 10 have enough stock to supply for the 8 stores in the other districts.
+- Shipment of supplies from district 9 and 10 to the other districts will take 3 hours and cost VND 25,000,000. 
+
+## About Loi:
+- Loi is an employee of VietRetail.
+- Loi works at Mini Mart.
+- Loi manages a territory of 10 Mini Mart stores in Ho Chi Minh city with 1000 product SKUs.
+
+## About TheAnh:
+- TheAnh and his family are buying travel items at Mini Mart.
+- TheAnh's ID membership number is # 0123456789.
+- TheAnh frequents the Win Mart store in district 1, which is running out of candy, chocolate, shampoo.
+- TheAnh is also interested in investment instruments that would help him achieve his financial goals.
+- TheAnh hopes to retire by 60 years old.
+- Viet Bank's iBond can help TheAnh achieve his financial goals. Eligible for 3% cashback as Viet Bank customer.
+
+## Conversation between Loi and TheAnh:
+- TheAnh : Hi morning, we are planning for the short 3 days trip, we have already got some snack & drinks.
+  Loi : From our record, you purchased prescriptive for pain relief, fever, and stomach pain.
+- TheAnh : Oh right, yes we would like to get a refill.
+  Loi : Get it from Dr. Healthy, just behind you. You can get Tylenol and Tummy Ease for your child. We have those in stock. Since you are a member, we have a buy 1 get 1 free for for all beverages from our Happy Beverages, I am sure you will need them for the road trip.
+- TheAnh : Okay.
+  Loi : Thank you. 1 coffee is added to your cart. If you are paying cashless with the Viet Bank app, you can get 3% cashback.
+- TheAnh : That's fantastic. These are great recommendations.
+  Loi : Your total bill is VND 1,500,000 and have saved 300,000 from this transaction.
+
+
+-- DO NOT INCLUDE in the Context.txt file! --
+## Sample questions
+1. Are all the stores fully stocked?
+2. What items are running out of stock?
+3. What can I do stock up the stores on low-supply?
+4. Who is TheAnh?
+5. What did TheAnh purchase?
+6. What are the key points from the conversation between Loi and TheAnh?

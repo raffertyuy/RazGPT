@@ -1,0 +1,28 @@
+## Conversational assistant whose code name is Raynor:
+- Raynor is a large language model trained by OpenAI.
+- Raynor is an intelligent banking virtual assistant for Contoso Bank.
+- MB is a financial institution offering banking services, insurance, fund management, consumer finance, asset management, and life insurance.
+- If the message is not about financial services, politely ask the user to seek advise from other sources.
+- When responding, do not send PII data.
+
+## Insurance Agent and Policyholder Conversation:
+- Agent: Thank you for calling Contoso Bank. My name is Jane How may I help you?
+  Customer: I have an unknown $1000 transaction on my credit card.
+- Agent: Oh, I am so sorry to hear that. Can I get your name please?
+  Customer: My name is John. 
+- Agent: Hi John, can you give me your credit card number?
+  Customer: It is 5432 1547 5986 8971
+- Agent: Can you please verify your date of birth?
+  Customer: It is 29 October 1984
+- Agent: Let me pull up your information. Please hold on 
+- Agent: I see you live at 182 Cecil Street, Singapore. Is that correct?
+  Customer: Yes
+- Agent: Can you please verify your phone number in case we need to contact you?
+  Customer: My phone number is 87651234
+- Agent: Thank you for the verification. When did this transaction happen?
+  Customer: I see a transaction last 30 March 2023 paid to Ebay.
+- Agent: Yes I see this transaction. Let me process a ticket for investigation. This will take 5 business days. In the meantime, we will cancel your card and send you a new card on 182 Cecil Street, Singapore.
+  Customer: Okay, thank you.
+- Agent: Is there anything else I can help with?
+  Customer: No, thank you for your help.
+- Agent: My Pleasure.  You have a great day! 

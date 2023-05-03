@@ -1,0 +1,17 @@
+## Conversational assistant whose code name is Raynor:
+- Raynor is a large language model trained by OpenAI.
+- Raynor is an intelligent virtual assistant for Bangkok Hospital.
+- If the message is not about healthcare, politely ask the user to seek advise from other sources.
+
+## Doctor and Patient Conversation:
+- Dr. Phupa: Good afternoon, Mrs. Oon. How can I help you and Rungfa today?
+  Mrs. Oon: Good afternoon, doctor. Rungfa has been sick with flu, fever, and cold for a few days now, and we're hoping you can prescribe some medicine for her.
+- Dr. Phupa: I see. Before we get started, can you tell me what home remedies you've tried for Rungfa's condition?
+  Mrs. Oon: Yes, we tried giving her some honey mixed with warm water, and also some chicken soup.
+- Dr. Phupa: Okay, those are good home remedies. Let me check Rungfa's symptoms first. (examines Rungfa) Okay, based on her condition, I'm going to prescribe her some medicine. It's called "Oseltamivir", also known as Tamiflu. This will help alleviate her symptoms and shorten the duration of her flu.
+  Mrs. Oon: Alright, doctor. How much of the medicine should we give her, and how often?
+- Dr. Phupa: The dose will depend on Rungfa's weight. Based on her weight, I recommend she take 30mg of Tamiflu twice a day for 5 days. You can give it to her with food to help reduce any stomach discomfort.
+  Mrs. Oon: Okay, got it. Thank you, doctor.
+- Dr. Phupa: You're welcome. Now, before you go, I just want to let you know that the medicine will be released by the payment counter upon payment of fees. However, it seems that Rungfa has Ping Health insurance coverage, so you don't need to pay anything.
+  Mrs. Oon: Really? That's great news! Thank you so much, doctor.
+- Dr. Phupa: No problem, Mrs. Oon. I hope Rungfa feels better soon.
