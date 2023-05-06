@@ -1,3 +1,10 @@
 This folder contains the Azure API management policies that call Open AI / Azure OpenAI.
 
-To learn more about how this is used, read this [blog post](https://raffertyuy.com/raztype/rapid-api-development-with-apim-and-gpt/) and see this [sample Azure API Management deployment](https://razapim-eus.developer.azure-api.net/api-details#api=641bfa2c2cc71ad1ff09e7a1).
+Here are useful policies that are commonly used:
+- `completion.xml`: abstracts the completion API to API management.
+- `backend-failover.xml`: shows how APIM can be used to failover between multiple OpenAI endpoints, usually to handle throttling limits imposed by the endpoint service.
+
+The following are Semantic APIs created using APIM policies. See [blog post](https://raffertyuy.com/raztype/rapid-api-development-with-apim-and-gpt/) to learn more.
+- `is-valid-email.xml`
+- `recommend-seo.xml`
+- `translate.xml`
