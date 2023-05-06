@@ -1,12 +1,11 @@
 <!--
     One method to handle Azure OpenAI rate limits is to create multiple instances across multiple regions.
-    This sample policy changes the backend service across 6 different openai endpoints if HTTP 429 is received.
+    
+    This sample policy load balances API requests across 6 different openai endpoints, round-robin.
+    It also fails over to the next service if an HTTP 4xx or 5xx is received.
 
     See here for how to configure multiple custom backends (with different api-keys) in Azure API Management: https://learn.microsoft.com/en-us/azure/api-management/backends
     This sample assumes that the model deployment IDs across the instances are the same.
-    
-    Sample HTTP 429 error message:
-    Requests to the Completions_Create Operation under Azure OpenAI API version 2022-12-01 have exceeded call rate limit of your current OpenAI S0 pricing tier. Please retry after 55 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.
 -->
 <policies>
     <inbound>
