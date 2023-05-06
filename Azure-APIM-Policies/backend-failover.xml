@@ -17,8 +17,45 @@
         <set-query-parameter name="api-version" exists-action="skip">
             <value>2023-03-15-preview</value>
         </set-query-parameter>
-        <set-backend-service backend-id="openaieus" />
-        <set-variable name="backend-counter" value="@(context.Variables.GetValueOrDefault("backend-counter", "0"))" />
+        <cache-lookup-value key="backend-counter" variable-name="backend-counter" />
+        <choose>
+            <when condition="@(!context.Variables.ContainsKey("backend-counter"))">
+                <set-variable name="backend-counter" value="0" />
+                <cache-store-value key="backend-counter" value="0" duration="100" />
+            </when>
+        </choose>
+        <choose>
+            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 0)">
+                <set-backend-service backend-id="razopenaieus" />
+                <set-variable name="backend-counter" value="1" />
+                <cache-store-value key="backend-counter" value="1" duration="100" />
+            </when>
+            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 1)">
+                <set-backend-service backend-id="razopenaieus2" />
+                <set-variable name="backend-counter" value="2" />
+                <cache-store-value key="backend-counter" value="2" duration="100" />
+            </when>
+            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 2)">
+                <set-backend-service backend-id="razopenaiscus" />
+                <set-variable name="backend-counter" value="3" />
+                <cache-store-value key="backend-counter" value="3" duration="100" />
+            </when>
+            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 3)">
+                <set-backend-service backend-id="razopenaiscus2" />
+                <set-variable name="backend-counter" value="4" />
+                <cache-store-value key="backend-counter" value="4" duration="100" />
+            </when>
+            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 4)">
+                <set-backend-service backend-id="razopenaiweu" />
+                <set-variable name="backend-counter" value="5" />
+                <cache-store-value key="backend-counter" value="5" duration="100" />
+            </when>
+            <otherwise>
+                <set-backend-service backend-id="razopenaiweu2" />
+                <set-variable name="backend-counter" value="0" />
+                <cache-store-value key="backend-counter" value="0" duration="100" />
+            </otherwise>
+        </choose>
         <cors>
             <allowed-origins>
                 <origin>*</origin>
@@ -30,33 +67,39 @@
         </cors>
     </inbound>
     <backend>
-        <retry condition="@(context.Response.StatusCode == 429)" count="12" interval="0" first-fast-retry="true">
+        <retry condition="@(context.Response.StatusCode >= 500 || context.Response.StatusCode >= 400)" count="12" interval="0" first-fast-retry="true">
             <choose>
-                <when condition="@(context.Response.StatusCode == 429)">
+                <when condition="@(context.Response.StatusCode >= 500 || context.Response.StatusCode >= 400)">
                     <choose>
                         <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 0)">
-                            <set-backend-service backend-id="openaieus2" />
+                            <set-backend-service backend-id="razopenaieus" />
                             <set-variable name="backend-counter" value="1" />
+                            <cache-store-value key="backend-counter" value="1" duration="100" />
                         </when>
                         <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 1)">
-                            <set-backend-service backend-id="openaiscus" />
+                            <set-backend-service backend-id="razopenaieus2" />
                             <set-variable name="backend-counter" value="2" />
+                            <cache-store-value key="backend-counter" value="2" duration="100" />
                         </when>
                         <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 2)">
-                            <set-backend-service backend-id="openaiscus2" />
+                            <set-backend-service backend-id="razopenaiscus" />
                             <set-variable name="backend-counter" value="3" />
+                            <cache-store-value key="backend-counter" value="3" duration="100" />
                         </when>
                         <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 3)">
-                            <set-backend-service backend-id="openaiweu" />
+                            <set-backend-service backend-id="razopenaiscus2" />
                             <set-variable name="backend-counter" value="4" />
+                            <cache-store-value key="backend-counter" value="4" duration="100" />
                         </when>
                         <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 4)">
-                            <set-backend-service backend-id="openaiweu2" />
+                            <set-backend-service backend-id="razopenaiweu" />
                             <set-variable name="backend-counter" value="5" />
+                            <cache-store-value key="backend-counter" value="5" duration="100" />
                         </when>
                         <otherwise>
-                            <set-backend-service backend-id="openaieus" />
+                            <set-backend-service backend-id="razopenaiweu2" />
                             <set-variable name="backend-counter" value="0" />
+                            <cache-store-value key="backend-counter" value="0" duration="100" />
                         </otherwise>
                     </choose>
                 </when>
@@ -66,6 +109,14 @@
     </backend>
     <outbound>
         <base />
+        <!-- Uncomment for debugging, this outputs the next backend-counter in the JSON response body. -->
+        <!--
+        <set-body>@{ 
+            JObject body = context.Response.Body.As<JObject>(); 
+            body.Add(new JProperty("backend-counter", ((string)context.Variables["backend-counter"])));
+            return body.ToString(); 
+        }</set-body>
+        -->
     </outbound>
     <on-error>
         <base />
