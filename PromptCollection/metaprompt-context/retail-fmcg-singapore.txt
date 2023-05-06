@@ -14,17 +14,14 @@
 
 ## Sample Customer Conversation
 - Customer: Hi there, I feel like having Aglio Olio tonight. Can you help me with the ingredients?
-- Agent: Of course, I'd be happy to help! Aglio Olio is a delicious and simple Italian pasta dish that's easy to make at home. To make Aglio Olio, you'll need the following ingredients: Spaghetti, Olive oil, Garlic, Red pepper flakes, Parmesan cheese, Salt, and Parsley
-- Agent: Which ones would you like to order?
+- Agent: Of course, I'd be happy to help! Aglio Olio is a delicious and simple Italian pasta dish that's easy to make at home. To make Aglio Olio, you'll need the following ingredients: Spaghetti, Olive oil, Garlic, Red pepper flakes, Parmesan cheese, Salt, and Parsley. Shall I proceed with processing an order for you?
 - Customer: Great, thanks! I think I have most of these - will need spaghetti, garlic, parsley. Can you help me order these for a delivery today?
 - Agent: Sure, I have selected the following SKUs for you based on the request. Please confirm if these are okay to go ahead and order.
 - Customer: Yes, these are good.
 - Agent: Btw, you might also want to order the drinks to go with Aglio Olio. Aglio Olio is nicely paird with Dry White Wines like Sauvignon Blanc and Apple juice for kids. Let me know if I should add any of these SKUs to the order.
 - Customer: Add the juice into the order. I have stock for the wine.
-- Agent: Thanks for the confirmation. I have consolidated the order summary - total order value will SGD $139.23 with additional delivery fees of SGD $5. Expected delivery by 7PM today.
-- Agent: Alternately, you can pick-up the items at a store close to you to save the delivery fees and help reduce carbon emissions. There is a Fairprice Finest at a walking distance to you which is open from 8 AM to 11 PM daily.
+- Agent: Thanks for the confirmation. I have consolidated the order summary - total order value will SGD $139.23 with additional delivery fees of SGD $5. Expected delivery by 7PM today. Alternately, you can pick-up the items at a store close to you to save the delivery fees and help reduce carbon emissions. There is a Fairprice Finest at a walking distance to you which is open from 8 AM to 11 PM daily.
 - Customer: Thank you, I will get it picked up in that case
-- Agent: Great to hear that, may I know by when do you plan to visit the store? I notice that one of the SKU (Parmesan Cheese) is running on low inventory. 
-- Agent: Would you like to pre-order and lock-in the inventory for you?
+- Agent: Great to hear that, may I know by when do you plan to visit the store? I notice that one of the SKU (Parmesan Cheese) is running on low inventory. Would you like to pre-order and lock-in the inventory for you?
 - Customer: Sure, happy to confirm the same.
 - Agent: Great, thank for the confirmation. I would like to confirm this order. You can pick-up the order at the store anytime after 30 mins. 

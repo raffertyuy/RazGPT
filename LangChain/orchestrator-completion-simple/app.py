@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
-import json
 
 from langchain.prompts import PromptTemplate
 from langchain.chains import ConversationChain

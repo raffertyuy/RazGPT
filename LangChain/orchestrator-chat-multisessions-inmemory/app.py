@@ -8,6 +8,7 @@ from langchain.prompts import (
     SystemMessagePromptTemplate,
     HumanMessagePromptTemplate
 )
+
 from langchain.chains import ConversationChain
 from langchain.llms import AzureOpenAI
 from langchain.chat_models import AzureChatOpenAI
@@ -56,17 +57,12 @@ llm = AzureOpenAI(
     verbose=True
 )
 
-memory = ConversationSummaryBufferMemory(
-    llm=llm,
-    max_token_limit=CHAT_MEMORY_MAX_TOKENS,
-    return_messages=True
-)
-
 conversation = ConversationChain(
-    llm=chat,
-    memory=memory,
-    prompt=prompt,
-    verbose=True)
+        llm=chat,
+        prompt=prompt,
+        verbose=True)
+
+memories = {}
 
 # Create the Flask app
 app = Flask(__name__)
@@ -74,9 +70,25 @@ app = Flask(__name__)
 @app.route('/chat', methods=['POST'])
 def chat():
     request_data = request.get_json()
+    sessionid = request_data['sessionid']
     message = request_data['message']
+    
+    if not sessionid:
+        return jsonify({"error": "sessionid is required"}), 400
+    
     if not message:
-        return jsonify({"error": "Message is required"}), 400
+        return jsonify({"error": "message is required"}), 400
+    
+    memory = memories.get(sessionid, None)
+    if memory is None:
+        memory = ConversationSummaryBufferMemory(
+            llm=llm,
+            max_token_limit=CHAT_MEMORY_MAX_TOKENS,
+            return_messages=True
+        )
+        memories[sessionid] = memory
+    
+    conversation.memory = memory
     
     with get_openai_callback() as cb:
         response = conversation.predict(input=message)
