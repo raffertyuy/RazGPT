@@ -56,15 +56,6 @@
                 <cache-store-value key="backend-counter" value="0" duration="100" />
             </otherwise>
         </choose>
-        <cors>
-            <allowed-origins>
-                <origin>*</origin>
-            </allowed-origins>
-            <allowed-methods>
-                <method>GET</method>
-                <method>POST</method>
-            </allowed-methods>
-        </cors>
     </inbound>
     <backend>
         <retry condition="@(context.Response.StatusCode >= 500 || context.Response.StatusCode >= 400)" count="12" interval="0" first-fast-retry="true">
