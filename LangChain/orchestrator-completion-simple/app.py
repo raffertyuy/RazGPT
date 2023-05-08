@@ -21,6 +21,7 @@ NUM_CONVERSATION_MEMORY = int(os.environ.get("NUM_CONVERSATION_MEMORY", "3"))
 
 # Initialize LangChain with Azure OpenAI
 llm = AzureOpenAI(
+    headers={"Ocp-Apim-Subscription-Key": os.environ["OPENAI_API_KEY"]}, # add this if endpoint authorization is not the default "api-key".
     model_name=COMPLETION_MODEL,
     deployment_name=COMPLETION_DEPLOYMENT,
     max_tokens=SUMMARY_MAX_TOKENS,
