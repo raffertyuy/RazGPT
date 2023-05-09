@@ -4,14 +4,10 @@ This folder contains my experimentations as I learn LangChain.
 The apps in this folder generally requires Python 3.
 
 To keep this repo simple, [venv](https://docs.python.org/3/library/venv.html) isn't configured.
-So in order to run, the following python packages must be installed (i.e. `pip install <package_name>`):
-- openai
-- langchain
-- python-dotenv
-- Flask
-- request
-- jsonify
-- and maybe more...
+The python package dependencies are found in the `requirements.txt` of each respective folder. To ensure that required dependencies are installed, run:
+```
+pip install -r requirements.txt
+```
 
 ## Completed
 - `/notebooks` contain LangChain quickstarts and my own experimentation.
