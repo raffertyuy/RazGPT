@@ -4,5 +4,7 @@
     "azureFunctions.projectLanguage": "C#",
     "azureFunctions.projectRuntime": "~4",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.preDeployTask": "publish (functions)"
+    "azureFunctions.preDeployTask": "publish (functions)",
+    "appService.defaultWebAppToDeploy": "/subscriptions/7308e0b7-489d-4f8b-80b7-832b0662d47d/resourceGroups/razopenaisearch-rg/providers/Microsoft.Web/sites/razorchestrator",
+    "appService.deploySubpath": "LangChain\\orchestrator-chat-multisessions-inmemory"
 }
