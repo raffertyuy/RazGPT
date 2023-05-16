@@ -13,7 +13,7 @@
 <policies>
     <inbound>
         <base />
-        <rewrite-uri template="/openai/deployments/text-davinci-003/completions?api-version=2023-03-15-preview" copy-unmatched-params="true" />
+        <rewrite-uri template="/openai/deployments/{deploymentId}/completions?api-version=2023-03-15-preview" copy-unmatched-params="true" />
         <set-header name="api-key" exists-action="override">
             <value>{{razopenai-key}}</value>
         </set-header>

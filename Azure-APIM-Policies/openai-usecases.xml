@@ -21,17 +21,15 @@
             <value>application/json</value>
         </set-header>
         <set-body>@{
-            var input = context.Request.Body.As<string>();
-            var from = context.Request.Url.Query.GetValueOrDefault("from");
-            var to = context.Request.Url.Query.GetValueOrDefault("to");
-            var prompt = $"Translate this text from {from} to {to}:\"{input}\"";
+            var topic = context.Request.Url.Query.GetValueOrDefault("topic");
+            var prompt = $"You generate a list of OpenAI use cases given a specific topic. The use cases are grouped into 4 categories: Content generation, Summarization, Code generation, and Semantic search. You share 5 use cases per category. Each use case is descriptive. Topic is {topic}.";
 
             return new JObject
             {
                 { "prompt", prompt },
-                { "max_tokens", 1000 },
+                { "max_tokens", 500 },
                 { "n", 1 },
-                { "temperature", 0.3 }
+                { "temperature", 0.7 }
             }.ToString();
         }</set-body>
     </inbound>
@@ -43,7 +41,7 @@
         <choose>
             <when condition="@(context.Response.StatusCode == 200)">
                 <set-header name="Content-Type" exists-action="override">
-                    <value>text/plain</value>
+                    <value>application/json</value>
                 </set-header>
                 <set-body>@{
                     var response = context.Response.Body.As<JObject>();

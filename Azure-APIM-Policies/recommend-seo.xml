@@ -13,7 +13,7 @@
 <policies>
     <inbound>
         <base />
-        <rewrite-uri template="/openai/deployments/text-davinci-003/completions?api-version=2023-03-15-preview" copy-unmatched-params="true" />
+        <rewrite-uri template="/openai/deployments/davinci/completions?api-version=2023-03-15-preview" copy-unmatched-params="true" />
         <set-header name="api-key" exists-action="override">
             <value>{{razopenai-key}}</value>
         </set-header>
@@ -21,11 +21,8 @@
             <value>application/json</value>
         </set-header>
         <set-body>@{
-            // parse URL to ensure string format is valid
-            var pageUrl = new Uri(context.Request.Url.Query.GetValueOrDefault("url"));
-            var pageUrlString = pageUrl.ToString();
-
-            var prompt = $"Respond in JSON format with keys title, description, keywords. Recommend SEO title, description and keywords for URL: \"{pageUrlString}\"";
+            var topic = context.Request.Url.Query.GetValueOrDefault("topic");
+            var prompt = $"Respond in YAML format with keys title, description, keywords. Recommend SEO title, description and keywords for this topic: {topic}";
 
             return new JObject
             {
