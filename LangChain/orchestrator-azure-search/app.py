@@ -40,23 +40,46 @@ AZURE_SEARCH_INDEX_NAME = os.environ["AZURE_SEARCH_INDEX_NAME"]
 AZURE_SEARCH_API_KEY = os.environ["AZURE_SEARCH_API_KEY"]
 SEARCH_MAX_RESULTS = int(os.environ.get("SEARCH_MAX_RESULTS", "3"))
 
-# Initialize LangChain with Azure OpenAI
-chat = AzureChatOpenAI(
-    deployment_name=CHAT_DEPLOYMENT,
-    openai_api_version=CHAT_API_VERSION,
-    max_tokens=CHAT_RESPONSE_MAX_TOKENS,
-    temperature=CHAT_TEMPERATURE,
-    verbose=True
-)
+OPENAI_API_HEADER = os.environ.get("OPENAI_API_HEADER")
 
-# memory for chat history, use the completion model to summarize past conversations
-llm = AzureOpenAI(
-    model_name=COMPLETION_MODEL,
-    deployment_name=COMPLETION_DEPLOYMENT,
-    max_tokens=SUMMARY_MAX_TOKENS,
-    temperature=SUMMARY_TEMPERATURE,
-    verbose=True
-)
+if OPENAI_API_HEADER:
+    # Initialize LangChain with Azure OpenAI
+    chat = AzureChatOpenAI(
+        headers = {OPENAI_API_HEADER: os.environ["OPENAI_API_KEY"]},
+        deployment_name=CHAT_DEPLOYMENT,
+        openai_api_version=CHAT_API_VERSION,
+        max_tokens=CHAT_RESPONSE_MAX_TOKENS,
+        temperature=CHAT_TEMPERATURE,
+        verbose=True
+    )
+
+    # memory for chat history, use the completion model to summarize past conversations
+    llm = AzureOpenAI(
+        headers = {OPENAI_API_HEADER: os.environ["OPENAI_API_KEY"]},
+        model_name=COMPLETION_MODEL,
+        deployment_name=COMPLETION_DEPLOYMENT,
+        max_tokens=SUMMARY_MAX_TOKENS,
+        temperature=SUMMARY_TEMPERATURE,
+        verbose=True
+    )
+else:
+    # Initialize LangChain with Azure OpenAI
+    chat = AzureChatOpenAI(
+        deployment_name=CHAT_DEPLOYMENT,
+        openai_api_version=CHAT_API_VERSION,
+        max_tokens=CHAT_RESPONSE_MAX_TOKENS,
+        temperature=CHAT_TEMPERATURE,
+        verbose=True
+    )
+
+    # memory for chat history, use the completion model to summarize past conversations
+    llm = AzureOpenAI(
+        model_name=COMPLETION_MODEL,
+        deployment_name=COMPLETION_DEPLOYMENT,
+        max_tokens=SUMMARY_MAX_TOKENS,
+        temperature=SUMMARY_TEMPERATURE,
+        verbose=True
+    )
 
 conversation = ConversationChain(
         llm=chat,

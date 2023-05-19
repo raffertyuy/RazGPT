@@ -435,6 +435,7 @@ __pycache__/
 __pypackages__/
 .pdm.toml
 global.json
+*secrets*.*
 
 # doxfx
 **/DROP/
