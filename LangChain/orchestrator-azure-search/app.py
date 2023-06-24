@@ -15,7 +15,7 @@ from langchain.chat_models import AzureChatOpenAI
 from langchain.memory import ConversationSummaryBufferMemory
 from langchain.callbacks import get_openai_callback
 
-from azure.core.credentials import AzureKeyCredential
+from azure.identity import DefaultAzureCredential
 from azure.search.documents import SearchClient
 
 import Prompts
@@ -24,7 +24,7 @@ import SearchUtil
 # Load Environment Variables
 load_dotenv()
 
-CHAT_API_VERSION = os.environ.get("OPENAI_CHAT_API_VERSION", "2023-03-15-preview")
+CHAT_API_VERSION = os.environ.get("OPENAI_CHAT_API_VERSION", "2023-05-15")
 CHAT_DEPLOYMENT = os.environ.get("OPENAI_CHAT_DEPLOYMENT", "gpt35")
 CHAT_TEMPERATURE = float(os.environ.get("OPENAI_CHAT_TEMPERATURE", "0.0"))
 CHAT_RESPONSE_MAX_TOKENS = int(os.environ.get("OPENAI_CHAT_RESPONSE_MAX_TOKENS", "100"))
@@ -37,61 +37,37 @@ CHAT_MEMORY_MAX_TOKENS = int(os.environ.get("OPENAI_CHAT_MEMORY_MAX_TOKENS", "20
 
 AZURE_SEARCH_SERVICE_ENDPOINT = os.environ["AZURE_SEARCH_SERVICE_ENDPOINT"]
 AZURE_SEARCH_INDEX_NAME = os.environ["AZURE_SEARCH_INDEX_NAME"]
-AZURE_SEARCH_API_KEY = os.environ["AZURE_SEARCH_API_KEY"]
 SEARCH_MAX_RESULTS = int(os.environ.get("SEARCH_MAX_RESULTS", "3"))
 
-OPENAI_API_HEADER = os.environ.get("OPENAI_API_HEADER")
+# Use the current user identity to authenticate with Azure OpenAI, Cognitive Search and Blob Storage (no secrets needed, 
+# just use 'az login' locally, and managed identity when deployed on Azure). If you need to use keys, use separate AzureKeyCredential instances with the 
+# keys for each service
+# If you encounter a blocking error during a DefaultAzureCredntial resolution, you can exclude the problematic credential by using a parameter (ex. exclude_shared_token_cache_credential=True)
+azure_credential = DefaultAzureCredential()
 
-if OPENAI_API_HEADER:
-    # Initialize LangChain with Azure OpenAI
-    chat = AzureChatOpenAI(
-        headers = {OPENAI_API_HEADER: os.environ["OPENAI_API_KEY"]},
-        deployment_name=CHAT_DEPLOYMENT,
-        openai_api_version=CHAT_API_VERSION,
-        max_tokens=CHAT_RESPONSE_MAX_TOKENS,
-        temperature=CHAT_TEMPERATURE,
-        verbose=True
-    )
+# Initialize LangChain with Azure OpenAI
+chat = AzureChatOpenAI(
+    deployment_name=CHAT_DEPLOYMENT,
+    openai_api_version=CHAT_API_VERSION,
+    max_tokens=CHAT_RESPONSE_MAX_TOKENS,
+    temperature=CHAT_TEMPERATURE,
+    verbose=True
+)
 
-    # memory for chat history, use the completion model to summarize past conversations
-    llm = AzureOpenAI(
-        headers = {OPENAI_API_HEADER: os.environ["OPENAI_API_KEY"]},
-        model_name=COMPLETION_MODEL,
-        deployment_name=COMPLETION_DEPLOYMENT,
-        max_tokens=SUMMARY_MAX_TOKENS,
-        temperature=SUMMARY_TEMPERATURE,
-        verbose=True
-    )
-else:
-    # Initialize LangChain with Azure OpenAI
-    chat = AzureChatOpenAI(
-        deployment_name=CHAT_DEPLOYMENT,
-        openai_api_version=CHAT_API_VERSION,
-        max_tokens=CHAT_RESPONSE_MAX_TOKENS,
-        temperature=CHAT_TEMPERATURE,
-        verbose=True
-    )
-
-    # memory for chat history, use the completion model to summarize past conversations
-    llm = AzureOpenAI(
-        model_name=COMPLETION_MODEL,
-        deployment_name=COMPLETION_DEPLOYMENT,
-        max_tokens=SUMMARY_MAX_TOKENS,
-        temperature=SUMMARY_TEMPERATURE,
-        verbose=True
-    )
+# memory for chat history, use the completion model to summarize past conversations
+llm = AzureOpenAI(
+    model_name=COMPLETION_MODEL,
+    deployment_name=COMPLETION_DEPLOYMENT,
+    max_tokens=SUMMARY_MAX_TOKENS,
+    temperature=SUMMARY_TEMPERATURE,
+    verbose=True
+)
 
 conversation = ConversationChain(
-        llm=chat,
-        verbose=True)
+    llm=chat,
+    verbose=True)
 
 memories = {}
-
-searchclient = SearchClient(
-    AZURE_SEARCH_SERVICE_ENDPOINT,
-    AZURE_SEARCH_INDEX_NAME,
-    AzureKeyCredential(AZURE_SEARCH_API_KEY)
-    )
 
 # Create the Flask app
 app = Flask(__name__)
@@ -101,6 +77,12 @@ def chat():
     request_data = request.get_json()
     sessionid = request_data['sessionid']
     message = request_data['message']
+    searchindex = request_data.get('searchindex', AZURE_SEARCH_INDEX_NAME)
+    
+    searchclient = SearchClient(
+        endpoint=AZURE_SEARCH_SERVICE_ENDPOINT,
+        index_name=searchindex,
+        credential=azure_credential)
     
     if not sessionid:
         return jsonify({"error": "sessionid is required"}), 400
@@ -134,6 +116,8 @@ def chat():
         SEARCH_MAX_RESULTS,
         searchclient)
     
+    del searchclient
+    
     # STEP 3: Answer the Question
     systemprompt = Prompts.CHAT_SYSTEMPROMPT.format(sources=searchresults)
     chatprompt = ChatPromptTemplate.from_messages([
@@ -155,5 +139,5 @@ def chat():
 
 if __name__ == "__main__":
     from waitress import serve
-    serve(app, host="0.0.0.0", port=8000)
+    serve(app, host="0.0.0.0", port=8080)
 

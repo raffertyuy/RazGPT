@@ -1,0 +1,25 @@
+<mxfile host="app.diagrams.net" modified="2023-06-15T10:30:26.057Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="qQK86bTRk191Z9Y6Xpir" version="21.3.7" type="device">
+  <diagram name="Page-1" id="n360QwdCdB8CpU6mqRKc">
+    <mxGraphModel dx="2074" dy="1148" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="LkeUqf3P_PT7w4a0gZKx-21" value="Orchestrator App&lt;br&gt;(Azure App Service)" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/App_Services.svg;" parent="1" vertex="1">
+          <mxGeometry x="120" y="510" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="LkeUqf3P_PT7w4a0gZKx-53" value="Azure Search" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Search.svg;" parent="1" vertex="1">
+          <mxGeometry x="390" y="350" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="LkeUqf3P_PT7w4a0gZKx-45" value="..." style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/ai_machine_learning/Cognitive_Services.svg;" parent="1" vertex="1">
+          <mxGeometry x="220" y="540" width="61" height="43.06" as="geometry" />
+        </mxCell>
+        <mxCell id="LkeUqf3P_PT7w4a0gZKx-44" value="Azure OpenAI&lt;br&gt;(South Central)" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/ai_machine_learning/Cognitive_Services.svg;" parent="1" vertex="1">
+          <mxGeometry x="200" y="630" width="61" height="43.06" as="geometry" />
+        </mxCell>
+        <mxCell id="LkeUqf3P_PT7w4a0gZKx-42" value="Azure OpenAI&lt;br&gt;(East US)" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/ai_machine_learning/Cognitive_Services.svg;" parent="1" vertex="1">
+          <mxGeometry x="120" y="700" width="61" height="43.06" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
