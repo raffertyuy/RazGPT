@@ -1,0 +1,78 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "qfMBDG",
+    "name": "RequestFeedback",
+    "comment": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "dsGewK"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "v5PX1L",
+            "comment": ""
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "prompt": "${ChoiceInput_Prompt_v5PX1L()}",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineOr": " or ",
+            "inlineSeparator": ", "
+          },
+          "style": "heroCard",
+          "choices": [
+            "1 - Very Unsatisfied",
+            "2 - Somewhat Unsatisfied",
+            "3 - Neutral",
+            "4 - Somewhat Satisfied",
+            "5 - Very Satisfied"
+          ],
+          "property": "user.feedbackScore",
+          "outputFormat": "index"
+        },
+        {
+          "$kind": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "6OLM0t"
+          },
+          "property": "user.feedbackScore",
+          "value": "=add(user.feedbackScore,1)"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "6sW2M5"
+          },
+          "activity": "${SendActivity_6sW2M5()}"
+        },
+        {
+          "$kind": "Microsoft.EndDialog",
+          "$designer": {
+            "id": "xWwj1l"
+          }
+        }
+      ]
+    }
+  ],
+  "generator": "RequestFeedback.lg",
+  "recognizer": "RequestFeedback.lu.qna",
+  "id": "RequestFeedback"
+}

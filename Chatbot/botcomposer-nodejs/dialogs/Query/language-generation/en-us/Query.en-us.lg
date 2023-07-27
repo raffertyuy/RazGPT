@@ -1,0 +1,11 @@
+[import](common.lg)
+
+# SendActivity_d0W6eq()
+[Activity
+    Text = ${SendActivity_d0W6eq_text()}
+]
+
+# SendActivity_d0W6eq_text()
+- Hi I'm Raynor, a GPT-based chat bot. How can I help you?
+- Howdy! Raynor here. What's up?
+- Hello! I'm Raynor, your AI virtual assistant. How may I assist you today?

@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# ChoiceInput_Prompt_v5PX1L()
+[Activity
+    Text = ${ChoiceInput_Prompt_v5PX1L_text()}
+]
+
+# ChoiceInput_Prompt_v5PX1L_text()
+- How did I do? Your feedback is appreciated!
+# SendActivity_6sW2M5()
+[Activity
+    Text = ${SendActivity_6sW2M5_text()}
+]
+
+# SendActivity_6sW2M5_text()
+- TODO: Save in Feedback DB (${user.sessionId},${user.feedbackScore})

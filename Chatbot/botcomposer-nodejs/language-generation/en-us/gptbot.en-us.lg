@@ -1,0 +1,51 @@
+[import](common.lg)
+
+# LogAction_Text_uQBrcN()
+[Activity
+    Text = ${LogAction_Text_uQBrcN_text()}
+]
+
+# LogAction_Text_uQBrcN_text()
+- sessionId=${user.sessionId}
+# LogAction_Text_f0ADgt()
+[Activity
+    Text = ${LogAction_Text_f0ADgt_text()}
+]
+
+# LogAction_Text_f0ADgt_text()
+- orchestratorUrl=${settings.appSettings.orchestratorUrl}
+# LogAction_Text_geltMR()
+[Activity
+    Text = ${LogAction_Text_geltMR_text()}
+]
+
+# LogAction_Text_geltMR_text()
+- sessionId=${user.sessionId}
+# LogAction_Text_43OSOS()
+[Activity
+    Text = ${LogAction_Text_43OSOS_text()}
+]
+
+# LogAction_Text_43OSOS_text()
+- message=${user.message}
+# SendActivity_xrrPoR()
+[Activity
+    Text = ${SendActivity_xrrPoR_text()}
+]
+
+# SendActivity_xrrPoR_text()
+- Restarting conversation...
+# SendActivity_uDuq3P()
+[Activity
+    Text = ${SendActivity_uDuq3P_text()}
+]
+
+# SendActivity_uDuq3P_text()
+- ${dialog.api_response.content.response} (total_tokens=${dialog.api_response.content.total_tokens})
+# SendActivity_9rMcbj()
+[Activity
+    Text = ${SendActivity_9rMcbj_text()}
+]
+
+# SendActivity_9rMcbj_text()
+- An error has occured. Please try again. (statusCode=${dialog.api_response.statusCode}; reasonPhrase=${dialog.api_response.reasonPhrase})

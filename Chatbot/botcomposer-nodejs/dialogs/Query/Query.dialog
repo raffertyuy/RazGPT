@@ -1,0 +1,47 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "Bav5CG",
+    "name": "Query",
+    "comment": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "hIosXq"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SetProperties",
+          "$designer": {
+            "id": "2AyYvI"
+          },
+          "assignments": [
+            {
+              "property": "user.sessionId",
+              "value": "=newGuid()"
+            },
+            {
+              "property": "user.message"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "d0W6eq"
+          },
+          "activity": "${SendActivity_d0W6eq()}"
+        }
+      ]
+    }
+  ],
+  "generator": "Query.lg",
+  "recognizer": "Query.lu.qna",
+  "id": "Query"
+}

@@ -1,0 +1,172 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "name": "gptbot",
+    "description": "",
+    "id": "A79tBe"
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnConversationUpdateActivity",
+      "$designer": {
+        "id": "376720",
+        "comment": "This trigger runs when a conversation update activity is sent to the bot. This indicates a user or bot being added or removed from a conversation."
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.Foreach",
+          "$designer": {
+            "id": "518944",
+            "name": "Loop: for each item",
+            "comment": "For each member added to the conversation."
+          },
+          "itemsProperty": "turn.Activity.membersAdded",
+          "actions": [
+            {
+              "$kind": "Microsoft.IfCondition",
+              "$designer": {
+                "id": "641773",
+                "name": "Branch: if/else",
+                "comment": "Checks that that member added ID does not match the bot ID. This prevents the greeting message from being sent when the bot is added to a conversation."
+              },
+              "condition": "=string(dialog.foreach.value.id) != string(turn.Activity.Recipient.id)",
+              "actions": [
+                {
+                  "$kind": "Microsoft.BeginDialog",
+                  "$designer": {
+                    "id": "PZEH4a"
+                  },
+                  "activityProcessed": true,
+                  "dialog": "Query"
+                }
+              ],
+              "elseActions": []
+            }
+          ],
+          "value": "dialog.foreach.value",
+          "index": "dialog.foreach.index"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnMessageActivity",
+      "$designer": {
+        "id": "Y3ye8D",
+        "name": "Message received (Message received activity)"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "VqvNfq"
+          },
+          "property": "user.message",
+          "value": "=turn.activity.text"
+        },
+        {
+          "$kind": "Microsoft.SwitchCondition",
+          "$designer": {
+            "id": "q5Nxyz"
+          },
+          "condition": "=toLower(trim(user.message))",
+          "cases": [
+            {
+              "value": "restart",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "xrrPoR"
+                  },
+                  "activity": "${SendActivity_xrrPoR()}"
+                },
+                {
+                  "$kind": "Microsoft.ReplaceDialog",
+                  "$designer": {
+                    "id": "QTObVz"
+                  },
+                  "activityProcessed": true,
+                  "dialog": "Query"
+                }
+              ]
+            },
+            {
+              "value": "goodbye",
+              "actions": [
+                {
+                  "$kind": "Microsoft.BeginDialog",
+                  "$designer": {
+                    "id": "YdyLz8"
+                  },
+                  "activityProcessed": true,
+                  "dialog": "RequestFeedback"
+                },
+                {
+                  "$kind": "Microsoft.ReplaceDialog",
+                  "$designer": {
+                    "id": "xREguV"
+                  },
+                  "activityProcessed": true,
+                  "dialog": "Query"
+                }
+              ]
+            }
+          ],
+          "default": [
+            {
+              "$kind": "Microsoft.SetProperty",
+              "$designer": {
+                "id": "uc5Zet"
+              },
+              "property": "user.jsonEscapedMessage",
+              "value": "=replace(replace(user.message, '\\\\', '\\\\\\\\'),'\"','\\\\\"')"
+            },
+            {
+              "$kind": "Microsoft.HttpRequest",
+              "$designer": {
+                "id": "3GaD3m"
+              },
+              "resultProperty": "dialog.api_response",
+              "method": "POST",
+              "url": "=settings.appSettings.chatUrl",
+              "headers": {},
+              "contentType": "application/json",
+              "responseType": "json",
+              "body": "{\"sessionid\": \"${user.sessionId}\",\"message\": \"${user.jsonEscapedMessage}\"}"
+            },
+            {
+              "$kind": "Microsoft.IfCondition",
+              "$designer": {
+                "id": "5H6wvg"
+              },
+              "condition": "=dialog.api_response.statusCode == 200",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "uDuq3P"
+                  },
+                  "activity": "${SendActivity_uDuq3P()}"
+                }
+              ],
+              "elseActions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "9rMcbj"
+                  },
+                  "activity": "${SendActivity_9rMcbj()}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "generator": "gptbot.lg",
+  "id": "gptbot",
+  "recognizer": "gptbot.lu.qna"
+}
