@@ -49,7 +49,7 @@ redisConnString = 'rediss://default:{}@{}:6380/0'.format(REDIS_KEY,REDIS_HOST)
 # just use 'az login' locally, and managed identity when deployed on Azure). If you need to use keys, use separate AzureKeyCredential instances with the 
 # keys for each service
 # If you encounter a blocking error during a DefaultAzureCredntial resolution, you can exclude the problematic credential by using a parameter (ex. exclude_shared_token_cache_credential=True)
-# azure_credential = DefaultAzureCredential()
+azure_credential = DefaultAzureCredential()
 
 # Initialize LangChain with Azure OpenAI
 chat = AzureChatOpenAI(
