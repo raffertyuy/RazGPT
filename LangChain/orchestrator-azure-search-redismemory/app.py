@@ -17,6 +17,7 @@ from langchain.memory import ConversationBufferWindowMemory
 from langchain.memory.chat_message_histories import RedisChatMessageHistory
 
 from azure.identity import DefaultAzureCredential
+#from azure.core.credentials import AzureKeyCredential
 from azure.search.documents import SearchClient
 
 import Prompts
@@ -48,7 +49,7 @@ redisConnString = 'rediss://default:{}@{}:6380/0'.format(REDIS_KEY,REDIS_HOST)
 # just use 'az login' locally, and managed identity when deployed on Azure). If you need to use keys, use separate AzureKeyCredential instances with the 
 # keys for each service
 # If you encounter a blocking error during a DefaultAzureCredntial resolution, you can exclude the problematic credential by using a parameter (ex. exclude_shared_token_cache_credential=True)
-azure_credential = DefaultAzureCredential()
+# azure_credential = DefaultAzureCredential()
 
 # Initialize LangChain with Azure OpenAI
 chat = AzureChatOpenAI(
@@ -88,6 +89,7 @@ def chat():
         endpoint=AZURE_SEARCH_SERVICE_ENDPOINT,
         index_name=searchindex,
         credential=azure_credential)
+        #credential=AzureKeyCredential("SEARCH_SERVICE_KEY_HERE"))        
     
     if not sessionid:
         return jsonify({"error": "sessionid is required"}), 400
@@ -101,7 +103,8 @@ def chat():
         history = RedisChatMessageHistory(url=connectionUrl, ttl=600, session_id=sessionid)
         memory = ConversationBufferWindowMemory(
             k = CHAT_MEMORY_WINDOW,
-            chat_memory=history
+            chat_memory=history,
+            return_messages=True
         )
         memories[sessionid] = memory
     
