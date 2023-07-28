@@ -7,7 +7,7 @@ Microsoft offers **two** solutions:
     - Low-code/No-code to C#/NodeJS code generation using the [Bot Framework Composer](https://learn.microsoft.com/en-us/composer/introduction?tabs=v2x)
 
 This folder is planned to contain multiple chatbot code samples that integrate with LLMs. At the moment it contains one:
-1. [botcomposer-nodejs](./botcomposer-nodejs/)
+1. [botcomposer-nodejs](./botcomposer-nodejs/) (with deployment issues)
 
 
 ### Limitations

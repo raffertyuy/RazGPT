@@ -1,3 +1,6 @@
+> **WARNING: Deploying to Azure does not work**
+> This code works when running locally. But the app published to Azure doesn't work and is filled with errors. Attempted publishing to a Windows and Linux App Service.
+
 This code is for deploying a simple chatbot to [Azure AI Bot Service](https://azure.microsoft.com/en-us/products/ai-services/ai-bot-service) using the [Microsoft Bot Framework Composer](https://learn.microsoft.com/en-us/composer/introduction?tabs=v2x) (v2.1.2).
 
 ### Running the App
