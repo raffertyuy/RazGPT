@@ -1,0 +1,2 @@
+azure-identity==1.13.0
+langchain==0.0.245

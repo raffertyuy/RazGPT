@@ -33,7 +33,6 @@ CHAT_MEMORY_MAX_TOKENS = int(os.environ.get("OPENAI_CHAT_MEMORY_MAX_TOKENS", "20
 
 # Initialize LangChain with Azure OpenAI
 chat = AzureChatOpenAI(
-    headers={"Ocp-Apim-Subscription-Key": os.environ["OPENAI_API_KEY"]}, # add this if endpoint authorization is not the default "api-key".
     deployment_name=CHAT_DEPLOYMENT,
     openai_api_version=CHAT_API_VERSION,
     max_tokens=CHAT_RESPONSE_MAX_TOKENS,
@@ -49,7 +48,6 @@ prompt = ChatPromptTemplate.from_messages([
 
 # memory for chat history, use the completion model to summarize past conversations
 llm = AzureOpenAI(
-    headers={"Ocp-Apim-Subscription-Key": os.environ["OPENAI_API_KEY"]}, # add this if endpoint authorization is not the default "api-key".
     model_name=COMPLETION_MODEL,
     deployment_name=COMPLETION_DEPLOYMENT,
     max_tokens=SUMMARY_MAX_TOKENS,
@@ -101,4 +99,4 @@ def chat():
 
 if __name__ == "__main__":
     from waitress import serve
-    serve(app, host="0.0.0.0", port=8000)
+    serve(app, host="0.0.0.0", port=8080)
