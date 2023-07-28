@@ -19,7 +19,7 @@ At the time of this writing, both the Bot Framework SDK and Composer are last up
 - Haven't tried the C# quickstart yet...
 
 **Microsoft Bot Framework Composer**
-- Generates code for IIS deployment (Windows only)
+- Generates code with a `web.config` file which indicates Windows/IIS deployment.
 - NodeJS support is still in preview
-- Quick deploy to Azure App Services and Functions
+- Ability to publish to Azure App Services and Functions (Windows and Linux)
 - No container support
