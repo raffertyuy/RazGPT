@@ -43,6 +43,7 @@ SEARCH_MAX_RESULTS = int(os.environ.get("SEARCH_MAX_RESULTS", "3"))
 
 REDIS_KEY = os.environ["REDIS_KEY"]
 REDIS_HOST = os.environ["REDIS_HOST"]
+REDIS_TTL = int(os.environ.get("REDIS_TTL", "600"))
 redisConnString = 'rediss://default:{}@{}:6380/0'.format(REDIS_KEY,REDIS_HOST)
 
 # Use the current user identity to authenticate with Azure OpenAI, Cognitive Search and Blob Storage (no secrets needed, 
@@ -97,10 +98,12 @@ def chat():
     if not message:
         return jsonify({"error": "message is required"}), 400
 
-    connectionUrl = 'rediss://default:{}@{}:6380/0'.format(REDIS_KEY,REDIS_HOST)
     memory = memories.get(sessionid, None)
     if memory is None:
-        history = RedisChatMessageHistory(url=connectionUrl, ttl=600, session_id=sessionid)
+        history = RedisChatMessageHistory(
+            url=redisConnString,
+            ttl=REDIS_TTL,
+            session_id=sessionid)
         memory = ConversationBufferWindowMemory(
             k = CHAT_MEMORY_WINDOW,
             chat_memory=history,
