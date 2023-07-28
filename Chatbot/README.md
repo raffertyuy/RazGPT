@@ -8,3 +8,18 @@ Microsoft offers **two** solutions:
 
 This folder is planned to contain multiple chatbot code samples that integrate with LLMs. At the moment it contains one:
 1. [botcomposer-nodejs](./botcomposer-nodejs/)
+
+
+### Limitations
+At the time of this writing, both the Bot Framework SDK and Composer are last updated 2022 or earlier. Therefore I hit a few limitations before arriving to the created sample codes:
+
+**Microsoft Bot Framework SDK**
+- NodeJS quickstart does not run
+- Python quickstart requires v3.10 or earlier
+- Haven't tried the C# quickstart yet...
+
+**Microsoft Bot Framework Composer**
+- Generates code for IIS deployment (Windows only)
+- NodeJS support is still in preview
+- Quick deploy to Azure App Services and Functions
+- No container support
