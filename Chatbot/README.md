@@ -8,7 +8,7 @@ Microsoft offers **two** solutions:
 
 ## Bots In-Progress
 - [ ] [botcomposer-nodejs](./botcomposer-nodejs/): created using Bot Framework Composer. Still with deployment issues)
-- [ ] [botframework-nodejs](./botframework-nodejs/): created using Bot Framework SDK.
+- [ ] [botframework-nodejs-simple](./botframework-nodejs/): Simple bot created using the Bot Framework SDK. No dialogs implemented.
 
 
 ### Limitations

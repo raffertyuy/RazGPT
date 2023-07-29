@@ -7,7 +7,20 @@ export class GptBot extends ActivityHandler {
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         this.onMessage(async (context, next) => {
             const replyText = `Echo: ${ context.activity.text }`;
-            await context.sendActivity(MessageFactory.text(replyText, replyText));
+
+            const axios = require('axios');
+            let response = await axios.post(`${process.env.ORCHESTRATOR_URL}/chat`, {
+                sessionid: context.activity.conversation.id,
+                message: context.activity.text,
+                searchindex: process.env.SEARCH_INDEX
+            });
+            
+            if (response.status != 200)
+                console.log(`ERROR: ${response.status} ${response.statusText}`);
+            else {
+                await context.sendActivity(MessageFactory.text(`${response.data.response} (Total Tokens: ${response.data.total_tokens})`));
+            }
+            
             // By calling next() you ensure that the next BotHandler is run.
             await next();
         });
