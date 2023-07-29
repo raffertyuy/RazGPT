@@ -6,8 +6,7 @@ Microsoft offers **two** solutions:
     - Pro-code (C#, NodeJS, Python) using the [Bot Framework SDK](https://learn.microsoft.com/en-us/azure/bot-service/index-bf-sdk?view=azure-bot-service-4.0)
     - Low-code/No-code to C#/NodeJS code generation using the [Bot Framework Composer](https://learn.microsoft.com/en-us/composer/introduction?tabs=v2x)
 
-## Bots Available
-This folder is planned to contain multiple chatbot code samples that integrate with LLMs. At the moment it contains one:
+## Bots In-Progress
 - [ ] [botcomposer-nodejs](./botcomposer-nodejs/): created using Bot Framework Composer. Still with deployment issues)
 - [ ] [botframework-nodejs](./botframework-nodejs/): created using Bot Framework SDK.
 
