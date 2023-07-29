@@ -1,5 +1,20 @@
 {
     "OpenAI": {
-        "BaseURL": ""
+        "Type": "azure",
+        "Version": "2023-05-15",
+        "Base": "",
+        "Key": "",
+        "Chat": {
+            "Model": "gpt-35-turbo",
+            "Deployment": "gpt35",
+            "Temperature": 0.0,
+            "ResponseMaxTokens": 100
+        },
+        "Completion": {
+            "Model": "text-davinci-003",
+            "Deployment": "davinci",
+            "Temperature": 0.0,
+            "MaxTokens": 300
+        }
     }
 }
