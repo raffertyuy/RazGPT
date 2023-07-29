@@ -20,4 +20,4 @@ pip install -r requirements.txt
 - `/orchestrator-azure-search-mongodb-memory` - a version of `/orchestrator-azure-search-redis-memory`, for long-term storage of chat messages. _(Observation: MongoDB is slower than Redis, but but I'm not certain if it's simply because of differences in pricing tier.)_
 
 ## Not Started / Work in Progress
-- No backlog at the moment.
+- No backlog for this folder at the moment.
