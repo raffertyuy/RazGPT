@@ -24,7 +24,7 @@ import SearchUtil
 # Load Environment Variables
 load_dotenv()
 
-CHAT_API_VERSION = os.environ.get("OPENAI_CHAT_API_VERSION", "2023-05-15")
+OPENAI_API_VERSION = os.environ.get("OPENAI_API_VERSION", "2023-05-15")
 CHAT_DEPLOYMENT = os.environ.get("OPENAI_CHAT_DEPLOYMENT", "gpt35")
 CHAT_TEMPERATURE = float(os.environ.get("OPENAI_CHAT_TEMPERATURE", "0.0"))
 CHAT_RESPONSE_MAX_TOKENS = int(os.environ.get("OPENAI_CHAT_RESPONSE_MAX_TOKENS", "100"))
@@ -48,7 +48,7 @@ azure_credential = DefaultAzureCredential()
 # Initialize LangChain with Azure OpenAI
 chat = AzureChatOpenAI(
     deployment_name=CHAT_DEPLOYMENT,
-    openai_api_version=CHAT_API_VERSION,
+    openai_api_version=OPENAI_API_VERSION,
     max_tokens=CHAT_RESPONSE_MAX_TOKENS,
     temperature=CHAT_TEMPERATURE,
     verbose=True

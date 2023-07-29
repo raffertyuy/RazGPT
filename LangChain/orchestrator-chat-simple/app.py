@@ -19,7 +19,7 @@ import Prompts
 # Load Environment Variables
 load_dotenv()
 
-CHAT_API_VERSION = os.environ.get("OPENAI_CHAT_API_VERSION", "2023-03-15-preview")
+OPENAI_API_VERSION = os.environ.get("OPENAI_API_VERSION", "2023-05-15")
 CHAT_DEPLOYMENT = os.environ.get("OPENAI_CHAT_DEPLOYMENT", "gpt35")
 CHAT_TEMPERATURE = float(os.environ.get("OPENAI_CHAT_TEMPERATURE", "0.3"))
 CHAT_RESPONSE_MAX_TOKENS = int(os.environ.get("OPENAI_CHAT_RESPONSE_MAX_TOKENS", "300"))
@@ -34,7 +34,7 @@ CHAT_MEMORY_MAX_TOKENS = int(os.environ.get("OPENAI_CHAT_MEMORY_MAX_TOKENS", "20
 chat = AzureChatOpenAI(
     headers={"Ocp-Apim-Subscription-Key": os.environ["OPENAI_API_KEY"]}, # add this if endpoint authorization is not the default "api-key".
     deployment_name=CHAT_DEPLOYMENT,
-    openai_api_version=CHAT_API_VERSION,
+    openai_api_version=OPENAI_API_VERSION,
     max_tokens=CHAT_RESPONSE_MAX_TOKENS,
     temperature=CHAT_TEMPERATURE,
     verbose=True
