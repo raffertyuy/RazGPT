@@ -6,8 +6,10 @@ export class GptBot extends ActivityHandler {
 
         // Retrieve Configuration
         const config = require('config');
-        let openaiBaseUrl = config.get('openai.baseurl');
-        console.log(`OpenAI Base URL: ${openaiBaseUrl}`)
+        let orchestratorBaseUrl = config.get('orchestrator.baseurl');
+        let orchestratorSearchIndex = config.get('orchestrator.searchindex');
+        console.log(`Orchestrator Base URL: ${orchestratorBaseUrl}`)
+        console.log(`Orchestrator Search Index: ${orchestratorSearchIndex}`)
 
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         this.onMessage(async (context, next) => {

@@ -1,20 +1,6 @@
 {
-    "openai": {
-        "type": "azure",
-        "version": "2023-05-15",
+    "orchestrator": {
         "baseurl": "",
-        "key": "",
-        "chat": {
-            "model": "gpt-35-turbo",
-            "deployment": "gpt35",
-            "temperature": 0.0,
-            "maxtokens": 100
-        },
-        "completion": {
-            "model": "text-davinci-003",
-            "deployment": "davinci",
-            "temperature": 0.0,
-            "maxtokens": 300
-        }
+        "searchindex": "gptkbindex"
     }
 }
