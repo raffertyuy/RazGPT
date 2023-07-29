@@ -6,7 +6,7 @@ export class GptBot extends ActivityHandler {
 
         // Retrieve Configuration
         const config = require('config');
-        let openaiBaseUrl = config.get('OpenAI.BaseURL');
+        let openaiBaseUrl = config.get('openai.baseurl');
         console.log(`OpenAI Base URL: ${openaiBaseUrl}`)
 
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
