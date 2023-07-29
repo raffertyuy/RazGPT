@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
 import * as path from 'path';
 
 import { config } from 'dotenv';
@@ -20,7 +17,7 @@ import {
 } from 'botbuilder';
 
 // This bot's main dialog.
-import { EchoBot } from './bot';
+import { GptBot } from './bot';
 
 
 // Create HTTP server.
@@ -29,8 +26,6 @@ server.use(restify.plugins.bodyParser());
 
 server.listen(process.env.port || process.env.PORT || 3978, () => {
     console.log(`\n${server.name} listening to ${server.url}`);
-    console.log('\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator');
-    console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
 });
 
 const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
@@ -70,7 +65,7 @@ const onTurnErrorHandler = async (context, error) => {
 adapter.onTurnError = onTurnErrorHandler;
 
 // Create the main dialog.
-const myBot = new EchoBot();
+const myBot = new GptBot();
 
 // Listen for incoming requests.
 server.post('/api/messages', async (req, res) => {

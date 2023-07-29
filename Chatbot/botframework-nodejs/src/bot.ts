@@ -1,11 +1,14 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
 import { ActivityHandler, MessageFactory } from 'botbuilder';
 
-export class EchoBot extends ActivityHandler {
+export class GptBot extends ActivityHandler {
     constructor() {
         super();
+
+        // Retrieve Configuration
+        const config = require('config');
+        let openaiBaseUrl = config.get('OpenAI.BaseURL');
+        console.log(`OpenAI Base URL: ${openaiBaseUrl}`)
+
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         this.onMessage(async (context, next) => {
             const replyText = `Echo: ${ context.activity.text }`;

@@ -2,7 +2,7 @@
     "name": "razgptbot",
     "version": "1.0.0",
     "description": "Connect to a custom copilot API.",
-    "author": "Generated using Microsoft Bot Builder Yeoman generator v4.17.0",
+    "author": "Rafferty Uy",
     "license": "MIT",
     "main": "./lib/index.js",
     "scripts": {
@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "botbuilder": "~4.15.0",
+        "config": "^3.3.9",
         "dotenv": "~8.2.0",
         "replace": "~1.2.0",
         "restify": "~8.5.1"
