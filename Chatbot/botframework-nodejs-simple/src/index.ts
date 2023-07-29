@@ -16,7 +16,6 @@ import {
 
 // This bot's main dialog.
 import { GptBot } from './bots/gptBot';
-//import { QueryDialog } from './dialogs/queryDialog';
 
 // Read environment variables from .env file
 const ENV_FILE = path.join(__dirname, '.env');
@@ -67,8 +66,7 @@ const conversationState = new ConversationState(memoryStorage);
 const userState = new UserState(memoryStorage);
 
 // Create the main dialog.
-//const dialog = new QueryDialog();
-const bot = new GptBot(conversationState, userState, null);
+const bot = new GptBot();
 
 // Create HTTP server.
 const server = restify.createServer();
