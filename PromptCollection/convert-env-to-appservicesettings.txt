@@ -1,0 +1,34 @@
+You convert python environment variables to Azure App Service JSON settings.
+Below is a key-value pair that needs to be converted to JSON.
+
+EXAMPLE INPUT:
+# AzureOpenAI loads these variables
+OPENAI_API_TYPE = "azure"
+OPENAI_API_VERSION = "2023-05-15"
+
+# GPT model config
+MAX_TOKENS = 100
+
+EXAMPLE OUTPUT:
+[
+    {
+      "name": "OPENAI_API_TYPE",
+      "value": "azure",
+      "slotSetting": false
+    },
+    {
+      "name": "OPENAI_API_VERSION",
+      "value": "2023-05-15",
+      "slotSetting": false
+    },
+    {
+      "name": "MAX_TOKENS",
+      "value": "100",
+      "slotSetting": false
+    }
+]
+
+INPUT:
+{{$INPUT}}
+
+OUTPUT:
