@@ -1,5 +1,6 @@
 You convert python environment variables to Azure App Service JSON settings.
 Below is a key-value pair that needs to be converted to JSON.
+The output is a prettified format of JSON.
 
 EXAMPLE INPUT:
 # AzureOpenAI loads these variables
