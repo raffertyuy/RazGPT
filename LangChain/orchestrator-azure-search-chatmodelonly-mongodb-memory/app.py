@@ -56,8 +56,6 @@ conversation = ConversationChain(
     llm=chatLLM,
     verbose=True)
 
-memories = {}
-
 # Create the Flask app
 app = Flask(__name__)
 
@@ -80,18 +78,15 @@ def chat():
     if not message:
         return jsonify({"error": "message is required"}), 400
 
-    memory = memories.get(sessionid, None)
-    if memory is None:
-        history = MongoDBChatMessageHistory(
-            connection_string=MONGODB_CONNECTIONSTRING,
-            session_id=sessionid
-        )
-        memory = ConversationBufferWindowMemory(
-            k = CHAT_MEMORY_WINDOW,
-            chat_memory=history,
-            return_messages=True
-        )
-        memories[sessionid] = memory
+    history = MongoDBChatMessageHistory(
+        connection_string=MONGODB_CONNECTIONSTRING,
+        session_id=sessionid
+    )
+    memory = ConversationBufferWindowMemory(
+        k = CHAT_MEMORY_WINDOW,
+        chat_memory=history,
+        return_messages=True
+    )
     
     conversation.memory = memory
 
@@ -110,8 +105,6 @@ def chat():
         SEARCH_MAX_RESULTS,
         searchclient)
     
-    del searchclient
-    
     # STEP 3: Answer the Question
     systemprompt = Prompts.CHAT_SYSTEMPROMPT.format(sources=searchresults)
     chatprompt = ChatPromptTemplate.from_messages([
@@ -125,6 +118,15 @@ def chat():
         response = conversation.predict(input=message)
         total_tokens = cb.total_tokens
 
+        del searchclient
+        del memory
+        del history
+        del memory_variables
+        del chat_history
+        del searchquery
+        del searchresults
+
+        # Return response
         return jsonify({
             "response": response,
             "sources": sources,
