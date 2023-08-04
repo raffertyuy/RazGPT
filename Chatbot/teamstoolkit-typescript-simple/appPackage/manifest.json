@@ -1,28 +1,28 @@
 {
     "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
     "manifestVersion": "1.16",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "id": "${{TEAMS_APP_ID}}",
     "packageName": "com.microsoft.teams.extension",
     "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://www.example.com",
-        "privacyUrl": "https://www.example.com/termofuse",
-        "termsOfUseUrl": "https://www.example.com/privacy"
+        "name": "Rafferty Uy",
+        "websiteUrl": "https://www.raffertyuy.com",
+        "privacyUrl": "https://www.raffertyuy.com/raztype/privacy-policy",
+        "termsOfUseUrl": "https://www.raffertyuy.com/raztype/privacy-policy"
     },
     "icons": {
         "color": "color.png",
         "outline": "outline.png"
     },
     "name": {
-        "short": "RazTeamsBot-${{TEAMSFX_ENV}}",
-        "full": "full name for RazTeamsBot"
+        "short": "RazChatGPT",
+        "full": "RazType ChatGPT"
     },
     "description": {
-        "short": "short description for RazTeamsBot",
-        "full": "full description for RazTeamsBot"
+        "short": "RazChatGPT built for Teams",
+        "full": "RazType ChatGPT built for Teams"
     },
-    "accentColor": "#FFFFFF",
+    "accentColor": "#3860b2",
     "bots": [
         {
             "botId": "${{BOT_ID}}",
