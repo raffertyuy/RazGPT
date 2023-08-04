@@ -15,12 +15,12 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "RazGptBot-${{TEAMSFX_ENV}}",
-        "full": "full name for RazGptBot"
+        "short": "RazTeamsBot-${{TEAMSFX_ENV}}",
+        "full": "full name for RazTeamsBot"
     },
     "description": {
-        "short": "short description for RazGptBot",
-        "full": "full description for RazGptBot"
+        "short": "short description for RazTeamsBot",
+        "full": "full description for RazTeamsBot"
     },
     "accentColor": "#FFFFFF",
     "bots": [

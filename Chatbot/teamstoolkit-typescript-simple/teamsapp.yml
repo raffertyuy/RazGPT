@@ -11,7 +11,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: RazGptBot-${{TEAMSFX_ENV}}
+      name: RazTeamsBot-${{TEAMSFX_ENV}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile:
@@ -21,7 +21,7 @@ provision:
   - uses: botAadApp/create
     with:
       # The Azure Active Directory application's display name
-      name: RazGptBot-${{TEAMSFX_ENV}}
+      name: RazTeamsBot-${{TEAMSFX_ENV}}
     writeToEnvironmentFile:
       # The Azure Active Directory application's client id created for bot.
       botId: BOT_ID
@@ -138,4 +138,4 @@ publish:
     # the specified environment variable(s).
     writeToEnvironmentFile:
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
-projectId: df73a4bf-412d-4b61-b8b0-c23add40471e
+projectId: f31dee9b-7453-45a7-9bb9-d22dae118a1e
