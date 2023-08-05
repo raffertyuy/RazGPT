@@ -7,7 +7,7 @@ import {
   CloudAdapter,
   ConfigurationServiceClientCredentialFactory,
   ConfigurationBotFrameworkAuthentication,
-  TurnContext,
+  TurnContext
 } from "botbuilder";
 
 // This bot's main dialog.

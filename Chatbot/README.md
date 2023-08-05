@@ -4,12 +4,11 @@ This folder contains code for deploying bots to the [Azure AI Bot Service](https
 - Pro-code (C#, NodeJS, Python) using the [Bot Framework SDK](https://learn.microsoft.com/en-us/azure/bot-service/index-bf-sdk?view=azure-bot-service-4.0)
 - Low-code/No-code to C#/NodeJS code generation using the [Bot Framework Composer](https://learn.microsoft.com/en-us/composer/introduction?tabs=v2x)
 
-## Available Bots
-**Completed**
-1. `/botframework-nodejs`: Simple bot created using the Bot Framework SDK. No dialogs implemented.
 
-**In-Progress**
-- `/botcomposer-nodejs`: created using Bot Framework Composer (with deployment issues).
+## Available Bots
+1. `/botcomposer-nodejs`: created using Bot Framework Composer (scrapped for now, with deployment issues).
+2. `/botframework-nodejs-simple`: Simple bot created using the Bot Framework SDK. No dialogs implemented.
+3. `/teamstoolkit-typescript-simple`: Discovered this handy [Teams Toolkit for VS Code](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/install-teams-toolkit?tabs=vscode) to implement bots for teams, with adaptive cards.
 
 
 ## Azure Deployment
@@ -26,6 +25,11 @@ az bot prepare-deploy --lang <language> --code-dir "."
 ```
 
 It should, in theory, also work with Linux. But I have not yet been successful in doing so.
+
+
+## Useful Links for Adaptive Card Templating
+- Samples: https://adaptivecards.io/samples/
+- Designer: https://adaptivecards.io/designer/
 
 
 ## Limitations

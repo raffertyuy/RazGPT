@@ -1,0 +1,39 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "TextBlock",
+            "size": "Medium",
+            "weight": "Bolder",
+            "text": "Restart Conversation?"
+        },
+        {
+            "type": "TextBlock",
+            "text": "This will wipe my memory of past conversations so we can have a fresh start.",
+            "wrap": true
+        },
+        {
+            "type": "ActionSet",
+            "actions": [
+                {
+                    "type": "Action.Execute",
+                    "title": "Yes",
+                    "verb": "restart-yes",
+                    "tooltip": "Yes"
+                },
+                {
+                    "type": "Action.Execute",
+                    "title": "No",
+                    "verb": "restart-no",
+                    "tooltip": "No"
+                }
+            ],
+            "spacing": "Padding",
+            "separator": true,
+            "horizontalAlignment": "Center",
+            "isVisible": "${areButtonsVisible}"
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.6"
+}

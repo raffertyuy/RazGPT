@@ -1,0 +1,25 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "TextBlock",
+            "size": "Medium",
+            "weight": "Bolder",
+            "text": "Feedback: How did I do?"
+        },
+        {
+            "type": "TextBlock",
+            "text": "I am still learning! To know more about how I can improve, please proceed to this survey. Thank you!",
+            "wrap": true
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.6",
+    "actions": [
+        {
+            "type": "Action.OpenUrl",
+            "title": "Go to Survey",
+            "url": "https://forms.microsoft.com/"
+        }
+    ]
+}

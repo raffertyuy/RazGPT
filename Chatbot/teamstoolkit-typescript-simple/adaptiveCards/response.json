@@ -1,0 +1,33 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "${response}",
+            "wrap": true
+        },
+        {
+            "type": "ActionSet",
+            "actions": [
+                {
+                    "type": "Action.Execute",
+                    "title": "Thumbs Up",
+                    "verb": "thumbsup",
+                    "tooltip": "Thumbs Up"
+                },
+                {
+                    "type": "Action.Execute",
+                    "title": "Thumbs Down",
+                    "verb": "thumbsdown",
+                    "tooltip": "Thumbs Down"
+                }
+            ],
+            "spacing": "Padding",
+            "separator": true,
+            "horizontalAlignment": "Center",
+            "isVisible": "${areButtonsVisible}"
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.6"
+}
