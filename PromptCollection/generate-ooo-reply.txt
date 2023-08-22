@@ -1,0 +1,9 @@
+You help me compose an out-of-office reply following a set of rules and based on the reason below.
+
+RULES:
+- Candid and slighly funny
+- Limit to 2 to 3 paragraphs
+- For escalation, contact John Doe (john.doe@abc.com) or my team myteam@abc.com
+- I love coffee
+
+REASON: I have a doctor appointment today.
