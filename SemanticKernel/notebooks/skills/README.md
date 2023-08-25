@@ -1,0 +1,1 @@
+Note: Many of these skills are copied from the [samples of Semantic Kernel](https://github.com/microsoft/semantic-kernel/tree/main/samples/skills)
