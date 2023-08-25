@@ -28,7 +28,7 @@ kernel.add_chat_service(
     )
 
 #%% Run a Semantic Function (from the skills folder)
-skill = kernel.import_semantic_skill_from_directory("./skills", "FunSkill")
+skill = kernel.import_semantic_skill_from_directory("../skills", "FunSkill")
 
 joke_function = skill["Joke"]
 print(joke_function("time travel to dinosaur age"))
