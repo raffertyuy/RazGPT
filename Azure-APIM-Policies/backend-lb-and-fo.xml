@@ -97,6 +97,12 @@
             return body.ToString(); 
         }</set-body>
         -->
+
+        <emit-metric name=“Subscription ID” value=“@ (context.Subscription.Id)”>
+            <dimension name=“API Name” value=“@ (context.Api.Name)” />
+            <dimension name=“Response Time” value=“@ (context.Response.Time)” />
+            <dimension name=“Total Tokens” value=“@ (context.Response.Body.As<JObject> (preserveContent: true) [“total_tokens”].ToString ())” namespace=“my-metrics” />
+        </emit-metric>
     </outbound>
     <on-error>
         <base />
