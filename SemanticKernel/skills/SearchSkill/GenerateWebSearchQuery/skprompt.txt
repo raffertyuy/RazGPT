@@ -1,0 +1,7 @@
+Generate an optimized query string for online search.
+
+Phrase: Who is the prime minister of Singapore?
+Query: prime minister of Singapore
+
+Phrase: {{$input}}
+Query: 

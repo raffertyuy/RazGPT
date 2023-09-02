@@ -1,0 +1,106 @@
+{
+    "version": "1.0",
+    "skillName": "SearchSkill",
+    "functionName": "GenerateWebSearchQuery",
+    "description": "Generates an optimal web search query string",
+    "filePath": "SemanticKernel\\skills\\SearchSkill\\GenerateWebSearchQuery\\skprompt.txt",
+    "results": [
+        {
+            "completionConfig": {
+                "label": "gpt35",
+                "aiService": "AzureOpenAI",
+                "deploymentOrModelId": "gpt35",
+                "endpoint": "https://razopenai.openai.azure.com/",
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0.5,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 256,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "I'm looking for good asian Restaurants in New York."
+                }
+            ],
+            "output": {
+                "prompt": "Generate an optimized query string for online search.\n\nPhrase: Who is the prime minister of Singapore?\nQuery: prime minister of Singapore\n\nPhrase: I'm looking for good asian Restaurants in New York.\nQuery: ",
+                "durationInMilliseconds": 1420.7043,
+                "inputTokens": null,
+                "outputTokens": null,
+                "result": "asian restaurants New York",
+                "chatCompletionResult": "asian restaurants New York"
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "davinci",
+                "aiService": "AzureOpenAI",
+                "deploymentOrModelId": "davinci",
+                "endpoint": "https://razopenai.openai.azure.com/",
+                "useCustomEndpoint": false,
+                "endpointType": "text-completion"
+            },
+            "requestSettings": {
+                "temperature": 0.5,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 256,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "I'm looking for good asian Restaurants in New York."
+                }
+            ],
+            "output": {
+                "prompt": "Generate an optimized query string for online search.\n\nPhrase: Who is the prime minister of Singapore?\nQuery: prime minister of Singapore\n\nPhrase: I'm looking for good asian Restaurants in New York.\nQuery: ",
+                "durationInMilliseconds": 1388.6731,
+                "inputTokens": 52,
+                "outputTokens": 6,
+                "result": " asian Restaurants New York",
+                "textCompletionResult": " asian Restaurants New York"
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "davinci",
+                "aiService": "AzureOpenAI",
+                "deploymentOrModelId": "davinci",
+                "endpoint": "https://razopenai.openai.azure.com/",
+                "useCustomEndpoint": false,
+                "endpointType": "text-completion"
+            },
+            "requestSettings": {
+                "temperature": 0.5,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 256,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "how can I cook carbonara?"
+                }
+            ],
+            "output": {
+                "prompt": "Generate an optimized query string for online search.\n\nPhrase: Who is the prime minister of Singapore?\nQuery: prime minister of Singapore\n\nPhrase: how can I cook carbonara?\nQuery: ",
+                "durationInMilliseconds": 1710.4293,
+                "inputTokens": 46,
+                "outputTokens": 5,
+                "result": " how to cook carbonara",
+                "textCompletionResult": " how to cook carbonara"
+            }
+        }
+    ]
+}
