@@ -19,6 +19,7 @@ pip install -r requirements.txt
 - `/orchestrator-azure-search-redis-memory` - This is a version of the above using Redis as a persistent memory storage. But due to [this issue](https://github.com/langchain-ai/langchain/issues/3072), we are using [ConversationBufferWindowMemory](https://python.langchain.com/docs/modules/memory/types/buffer_window) instead.
 - `/orchestrator-azure-search-mongodb-memory` - a version of `/orchestrator-azure-search-redis-memory`, for long-term storage of chat messages. _(Observation: MongoDB is slower than Redis, but but I'm not certain if it's simply because of differences in pricing tier.)_
 - `/orchestrator-azure-search-chatmodelonly-mongodb-memory` - this version uses chat models only (`gpt-35-turbo`) because new Azure subscriptions can no longer get the older `text-davinci-003`.
+- `/orchestrator-azure-search-dbindex-mongodb-memory` - this version users a search index based on an Azure SQL table/view data source.
 
 ## Not Started / Work in Progress
 - No backlog for this folder at the moment.
