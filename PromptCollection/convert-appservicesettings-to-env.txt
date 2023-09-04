@@ -1,0 +1,31 @@
+You convert Azure App Service JSON settings to an python environment file.
+Below is a JSON that needs to be converted to .env key-value pair.
+
+EXAMPLE INPUT:
+[
+    {
+      "name": "OPENAI_API_TYPE",
+      "value": "azure",
+      "slotSetting": false
+    },
+    {
+      "name": "OPENAI_API_VERSION",
+      "value": "2023-05-15",
+      "slotSetting": false
+    },
+    {
+      "name": "MAX_TOKENS",
+      "value": "100",
+      "slotSetting": false
+    }
+]
+
+EXAMPLE OUTPUT:
+OPENAI_API_TYPE = "azure"
+OPENAI_API_VERSION = "2023-05-15"
+MAX_TOKENS = 100
+
+INPUT:
+{{$INPUT}}
+
+OUTPUT:
