@@ -26,6 +26,39 @@
             "variables": [
                 {
                     "key": "input",
+                    "value": "what is people of walmart?"
+                }
+            ],
+            "output": {
+                "prompt": "Generate an optimized query string for online search.\n\nPhrase: Who is the prime minister of Singapore?\nQuery: prime minister of Singapore\n\nPhrase: what is people of walmart?\nQuery: ",
+                "durationInMilliseconds": 1414.8994,
+                "inputTokens": null,
+                "outputTokens": null,
+                "result": "people of walmart",
+                "chatCompletionResult": "people of walmart"
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt35",
+                "aiService": "AzureOpenAI",
+                "deploymentOrModelId": "gpt35",
+                "endpoint": "https://razopenai.openai.azure.com/",
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0.5,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 256,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
                     "value": "I'm looking for good asian Restaurants in New York."
                 }
             ],

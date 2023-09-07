@@ -1,0 +1,24 @@
+{
+    "schema": 1,
+    "description": "Create SQL to fulfill a user request that will be run against a database configured by the defined schema.",
+    "type": "completion",
+    "completion": {
+        "max_tokens": 200,
+        "temperature": 0.5,
+        "top_p": 0,
+        "presence_penalty": 0,
+        "frequency_penalty": 0
+    },
+    "input": {
+        "parameters": [
+            {
+                "name": "input",
+                "description": "The users request that should be translated into SQL."
+            },
+            {
+                "name": "schema",
+                "description": "The database schema that the generated SQL will be run against."
+            }
+        ]
+    }
+}

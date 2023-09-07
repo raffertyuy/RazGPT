@@ -1,0 +1,120 @@
+{
+    "version": "1.0",
+    "skillName": "SqlSkill",
+    "functionName": "CreateQuery",
+    "description": "Create SQL to fulfill a user request that will be run against a database configured by the defined schema.",
+    "filePath": "SemanticKernel\\skills\\SqlSkill\\CreateQuery\\skprompt.txt",
+    "results": [
+        {
+            "completionConfig": {
+                "label": "gpt35",
+                "aiService": "AzureOpenAI",
+                "deploymentOrModelId": "gpt35",
+                "endpoint": "https://razopenai.openai.azure.com/",
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0.5,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 200,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "schema",
+                    "value": "CREATE TABLE [Customer] ( \t[Id] INTEGER NOT NULL IDENTITY(1,1),  \t[FirstName] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,  \t[LastName] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,  \t[City] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[Country] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[Phone] NVARCHAR(20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \tCONSTRAINT [PK_CUSTOMER] PRIMARY KEY ([Id]) )  CREATE TABLE [Order] ( \t[Id] INTEGER NOT NULL IDENTITY(1,1),  \t[OrderDate] DATETIME NOT NULL DEFAULT (getdate()),  \t[OrderNumber] NVARCHAR(10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[CustomerId] INTEGER NOT NULL,  \t[TotalAmount] FLOAT(53) NULL DEFAULT ((0)),  \tCONSTRAINT [PK_ORDER] PRIMARY KEY ([Id]),  \tCONSTRAINT [FK_ORDER_REFERENCE_CUSTOMER] FOREIGN KEY([CustomerId]) REFERENCES [Customer] ([Id]) )"
+                },
+                {
+                    "key": "input",
+                    "value": "list top 5 customers by highest total order amount"
+                }
+            ],
+            "output": {
+                "prompt": "Act as an expert SQL database engineer.\r\n\r\nYou will be provided with the SQL used to create the schema of an existing database.\r\nYour goal is to create valid, well-formed SQL that will be executed to fulfill the request.\r\nUse explicit table aliases where possible and do not duplicate column names across joins, make them descriptive and unique.\r\nOnly reference the database schema, referencing anything else that wasn't defined will cause an error.\r\n\r\nSchema:\r\n```\r\nCREATE TABLE [Customer] ( \t[Id] INTEGER NOT NULL IDENTITY(1,1),  \t[FirstName] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,  \t[LastName] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,  \t[City] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[Country] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[Phone] NVARCHAR(20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \tCONSTRAINT [PK_CUSTOMER] PRIMARY KEY ([Id]) )  CREATE TABLE [Order] ( \t[Id] INTEGER NOT NULL IDENTITY(1,1),  \t[OrderDate] DATETIME NOT NULL DEFAULT (getdate()),  \t[OrderNumber] NVARCHAR(10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[CustomerId] INTEGER NOT NULL,  \t[TotalAmount] FLOAT(53) NULL DEFAULT ((0)),  \tCONSTRAINT [PK_ORDER] PRIMARY KEY ([Id]),  \tCONSTRAINT [FK_ORDER_REFERENCE_CUSTOMER] FOREIGN KEY([CustomerId]) REFERENCES [Customer] ([Id]) )\r\n```\r\n\r\nQuestion: list top 5 customers by highest total order amount\r\n\r\nThe SQL should be valid, well-formed, and execute without error.\r\nYour response will be executed as is so only output SQL that is immediately runnable.\r\nAnalyze from the perspective of other experts in your field and work it out in a step by step way to be sure you have the right answer.\r\nDo not format or add commentary to your response. No prose.",
+                "durationInMilliseconds": 3358.7178,
+                "inputTokens": null,
+                "outputTokens": null,
+                "result": "SELECT TOP 5 c.FirstName, c.LastName, SUM(o.TotalAmount) AS TotalOrderAmount\nFROM Customer c\nJOIN [Order] o ON c.Id = o.CustomerId\nGROUP BY c.FirstName, c.LastName\nORDER BY TotalOrderAmount DESC;",
+                "chatCompletionResult": "SELECT TOP 5 c.FirstName, c.LastName, SUM(o.TotalAmount) AS TotalOrderAmount\nFROM Customer c\nJOIN [Order] o ON c.Id = o.CustomerId\nGROUP BY c.FirstName, c.LastName\nORDER BY TotalOrderAmount DESC;"
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt35",
+                "aiService": "AzureOpenAI",
+                "deploymentOrModelId": "gpt35",
+                "endpoint": "https://razopenai.openai.azure.com/",
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0.5,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 200,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "schema",
+                    "value": "CREATE TABLE [Customer] ( \t[Id] INTEGER NOT NULL IDENTITY(1,1),  \t[FirstName] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,  \t[LastName] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,  \t[City] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[Country] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[Phone] NVARCHAR(20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \tCONSTRAINT [PK_CUSTOMER] PRIMARY KEY ([Id]) )  CREATE TABLE [Order] ( \t[Id] INTEGER NOT NULL IDENTITY(1,1),  \t[OrderDate] DATETIME NOT NULL DEFAULT (getdate()),  \t[OrderNumber] NVARCHAR(10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[CustomerId] INTEGER NOT NULL,  \t[TotalAmount] FLOAT(53) NULL DEFAULT ((0)),  \tCONSTRAINT [PK_ORDER] PRIMARY KEY ([Id]),  \tCONSTRAINT [FK_ORDER_REFERENCE_CUSTOMER] FOREIGN KEY([CustomerId]) REFERENCES [Customer] ([Id]) )"
+                },
+                {
+                    "key": "input",
+                    "value": "list top 5 customers by sum of TotalAmount grouped by customer name"
+                }
+            ],
+            "output": {
+                "prompt": "Act as an expert SQL database engineer.\r\n\r\nYou will be provided with the SQL used to create the schema of an existing database.\r\nYour goal is to create valid, well-formed SQL that will be executed to fulfill the request.\r\nUse explicit table aliases where possible and do not duplicate column names across joins, make them descriptive and unique.\r\nOnly reference the database schema, referencing anything else that wasn't defined will cause an error.\r\n\r\nSchema:\r\n```\r\nCREATE TABLE [Customer] ( \t[Id] INTEGER NOT NULL IDENTITY(1,1),  \t[FirstName] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,  \t[LastName] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,  \t[City] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[Country] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[Phone] NVARCHAR(20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \tCONSTRAINT [PK_CUSTOMER] PRIMARY KEY ([Id]) )  CREATE TABLE [Order] ( \t[Id] INTEGER NOT NULL IDENTITY(1,1),  \t[OrderDate] DATETIME NOT NULL DEFAULT (getdate()),  \t[OrderNumber] NVARCHAR(10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[CustomerId] INTEGER NOT NULL,  \t[TotalAmount] FLOAT(53) NULL DEFAULT ((0)),  \tCONSTRAINT [PK_ORDER] PRIMARY KEY ([Id]),  \tCONSTRAINT [FK_ORDER_REFERENCE_CUSTOMER] FOREIGN KEY([CustomerId]) REFERENCES [Customer] ([Id]) )\r\n```\r\n\r\nQuestion: list top 5 customers by sum of TotalAmount grouped by customer name\r\n\r\nThe SQL should be valid, well-formed, and execute without error.\r\nYour response will be executed as is so only output SQL that is immediately runnable.\r\nAnalyze from the perspective of other experts in your field and work it out in a step by step way to be sure you have the right answer.\r\nDo not format or add commentary to your response. No prose.",
+                "durationInMilliseconds": 3409.9596,
+                "inputTokens": null,
+                "outputTokens": null,
+                "result": "SELECT TOP 5 c.FirstName + ' ' + c.LastName AS CustomerName, SUM(o.TotalAmount) AS TotalAmountSum\nFROM Customer c\nJOIN [Order] o ON c.Id = o.CustomerId\nGROUP BY c.FirstName, c.LastName\nORDER BY TotalAmountSum DESC;",
+                "chatCompletionResult": "SELECT TOP 5 c.FirstName + ' ' + c.LastName AS CustomerName, SUM(o.TotalAmount) AS TotalAmountSum\nFROM Customer c\nJOIN [Order] o ON c.Id = o.CustomerId\nGROUP BY c.FirstName, c.LastName\nORDER BY TotalAmountSum DESC;"
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt35",
+                "aiService": "AzureOpenAI",
+                "deploymentOrModelId": "gpt35",
+                "endpoint": "https://razopenai.openai.azure.com/",
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0.5,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 200,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "schema",
+                    "value": "CREATE TABLE [Customer] ( \t[Id] INTEGER NOT NULL IDENTITY(1,1),  \t[FirstName] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,  \t[LastName] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,  \t[City] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[Country] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[Phone] NVARCHAR(20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \tCONSTRAINT [PK_CUSTOMER] PRIMARY KEY ([Id]) )"
+                },
+                {
+                    "key": "input",
+                    "value": "who are the customers who live in germany?"
+                }
+            ],
+            "output": {
+                "prompt": "Act as an expert SQL database engineer.\r\n\r\nYou will be provided with the SQL used to create the schema of an existing database.\r\nYour goal is to create valid, well-formed SQL that will be executed to fulfill the request.\r\nUse explicit table aliases where possible and do not duplicate column names across joins, make them descriptive and unique.\r\nOnly reference the database schema, referencing anything else that wasn't defined will cause an error.\r\n\r\nSchema:\r\n```\r\nCREATE TABLE [Customer] ( \t[Id] INTEGER NOT NULL IDENTITY(1,1),  \t[FirstName] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,  \t[LastName] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,  \t[City] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[Country] NVARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \t[Phone] NVARCHAR(20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,  \tCONSTRAINT [PK_CUSTOMER] PRIMARY KEY ([Id]) )\r\n```\r\n\r\nQuestion: who are the customers who live in germany?\r\n\r\nThe SQL should be valid, well-formed, and execute without error.\r\nYour response will be executed as is so only output SQL that is immediately runnable.\r\nAnalyze from the perspective of other experts in your field and work it out in a step by step way to be sure you have the right answer.\r\nDo not format or add commentary to your response. No prose.",
+                "durationInMilliseconds": 1620.391,
+                "inputTokens": null,
+                "outputTokens": null,
+                "result": "SELECT * FROM Customer WHERE Country = 'Germany'",
+                "chatCompletionResult": "SELECT * FROM Customer WHERE Country = 'Germany'"
+            }
+        }
+    ]
+}
