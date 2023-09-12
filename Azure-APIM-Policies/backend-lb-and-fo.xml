@@ -10,76 +10,86 @@
 <policies>
     <inbound>
         <base />
+        <!-- default values if wasn't specified by the caller -->
         <set-header name="Content-Type" exists-action="override">
             <value>application/json</value>
         </set-header>
         <set-query-parameter name="api-version" exists-action="skip">
             <value>2023-05-15</value>
         </set-query-parameter>
+
+        <!-- use APIM managed identity to authenticate with OpenAI
+             - managed identity should have "Cognitive Services OpenAI Contributor" role
+             - if not using managed identity, set the api-key in the APIM backend configuration
+        -->
+        <authentication-managed-identity resource="https://cognitiveservices.azure.com/" />
+
+        <!-- round robin load balancing of multiple OpenAI BE endpoints -->
         <cache-lookup-value key="backend-counter" variable-name="backend-counter" />
         <choose>
             <when condition="@(!context.Variables.ContainsKey("backend-counter"))">
-                <set-variable name="backend-counter" value="0" />
-                <cache-store-value key="backend-counter" value="0" duration="100" />
-            </when>
-        </choose>
-        <choose>
-            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 0)">
-                <set-backend-service backend-id="raz-aoai-eus" />
                 <set-variable name="backend-counter" value="1" />
                 <cache-store-value key="backend-counter" value="1" duration="100" />
             </when>
-            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 1)">
-                <set-backend-service backend-id="raz-aoai-scus" />
+        </choose>
+        <choose>
+            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 5 == 1)">
+                <set-backend-service backend-id="raz-aoai-eus" />
                 <set-variable name="backend-counter" value="2" />
                 <cache-store-value key="backend-counter" value="2" duration="100" />
             </when>
-            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 2)">
-                <set-backend-service backend-id="raz-aoai-weu" />
+            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 5 == 2)">
+                <set-backend-service backend-id="raz-aoai-scus" />
                 <set-variable name="backend-counter" value="3" />
                 <cache-store-value key="backend-counter" value="3" duration="100" />
             </when>
-            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 3)">
-                <set-backend-service backend-id="raz-aoai-fc" />
+            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 5 == 3)">
+                <set-backend-service backend-id="raz-aoai-weu" />
                 <set-variable name="backend-counter" value="4" />
                 <cache-store-value key="backend-counter" value="4" duration="100" />
             </when>
+            <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 5 == 4)">
+                <set-backend-service backend-id="raz-aoai-fc" />
+                <set-variable name="backend-counter" value="5" />
+                <cache-store-value key="backend-counter" value="5" duration="100" />
+            </when>
             <otherwise>
                 <set-backend-service backend-id="raz-aoai-uks" />
-                <set-variable name="backend-counter" value="0" />
-                <cache-store-value key="backend-counter" value="0" duration="100" />
+                <set-variable name="backend-counter" value="1" />
+                <cache-store-value key="backend-counter" value="1" duration="100" />
             </otherwise>
         </choose>
     </inbound>
     <backend>
-        <retry condition="@(context.Response.StatusCode >= 500 || context.Response.StatusCode >= 400)" count="12" interval="0" first-fast-retry="true">
+        <!-- if HTTP 4xx or 5xx occurs, failover to the next OpenAI BE endpoint -->
+        <retry condition="@(context.Response.StatusCode >= 500 || context.Response.StatusCode >= 400)" count="10" interval="0" first-fast-retry="true">
             <choose>
                 <when condition="@(context.Response.StatusCode >= 500 || context.Response.StatusCode >= 400)">
                     <choose>
-                        <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 0)">
+                        <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 5 == 1)">
                             <set-backend-service backend-id="raz-aoai-eus" />
                             <set-variable name="backend-counter" value="1" />
                             <cache-store-value key="backend-counter" value="1" duration="100" />
                         </when>
-                        <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 1)">
+                        <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 5 == 2)">
                             <set-backend-service backend-id="raz-aoai-scus" />
                             <set-variable name="backend-counter" value="2" />
                             <cache-store-value key="backend-counter" value="2" duration="100" />
                         </when>
-                        <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 2)">
+                        <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 5 == 3)">
                             <set-backend-service backend-id="raz-aoai-weu" />
                             <set-variable name="backend-counter" value="3" />
                             <cache-store-value key="backend-counter" value="3" duration="100" />
                         </when>
-                        <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 6 == 3)">
+                        <when condition="@(int.Parse((string)context.Variables["backend-counter"]) % 5 == 4)">
                             <set-backend-service backend-id="raz-aoai-fc" />
                             <set-variable name="backend-counter" value="4" />
                             <cache-store-value key="backend-counter" value="4" duration="100" />
                         </when>
                         <otherwise>
                             <set-backend-service backend-id="raz-aoai-uks" />
-                            <set-variable name="backend-counter" value="0" />
-                            <cache-store-value key="backend-counter" value="0" duration="100" />
+                            <set-variable name="backend-counter" value="1" />
+                            <cache-store-value key="backend-counter" value="1" duration="100" />
                         </otherwise>
                     </choose>
                 </when>
@@ -98,11 +108,13 @@
         }</set-body>
         -->
 
+        <!-- Draft code, not working
         <emit-metric name=“Subscription ID” value=“@ (context.Subscription.Id)”>
             <dimension name=“API Name” value=“@ (context.Api.Name)” />
             <dimension name=“Response Time” value=“@ (context.Response.Time)” />
             <dimension name=“Total Tokens” value=“@ (context.Response.Body.As<JObject> (preserveContent: true) [“total_tokens”].ToString ())” namespace=“my-metrics” />
         </emit-metric>
+        -->
     </outbound>
     <on-error>
         <base />

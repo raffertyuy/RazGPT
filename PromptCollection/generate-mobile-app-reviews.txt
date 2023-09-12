@@ -1,0 +1,5 @@
+KalesaAuto is a smart motorcycle manufacturer and retailer.
+KalesaAuto has two bike models: Kalesa Lite and Kalesa Max.
+To use the bikes, KalesaAuto created an accompanying mobile application called My Kalesa, which is downloadable in the Apple App Store and the Google Play Store. The app has multiple features such as seeing the telemetry from the bike ride, tracking the location of the bike, seeing the bike trip history, emergency shut down of the bike, and sharing the location to a friend or family member.
+
+Help me generate 5 mixed reviews in this JSON format. The properties are title, rating, feedback.
