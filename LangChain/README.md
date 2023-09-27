@@ -11,7 +11,10 @@ pip install -r requirements.txt
 ```
 
 ## Completed
+### Notebooks
 - `/notebooks` contain LangChain quickstarts and my own experimentation.
+
+### Orchestrators
 - `/orchestrator-completion-simple` is an orchestrator service app using the Completion API of Azure OpenAI `text-davinci-003`. This is the latest model in GA as of 2023-05-01.
 - `/orchestrator-chat-simple` is an orchestrator service using the Chat Completion API of Azure OpenAI `gpt-35-turbo` or `gpt-4`. These models are still in public preview and not recommended for production as of 2023-05-01.
 - `/orchestrator-chat-multisessions-inmemory` - keep track of conversation history by `sessionid`. The _LangChain Memory_ is stored **in-memory.** Which means the conversation history will clear when the web server restarts (or the client session times-out). If this is deployed in Azure App Services, make sure that **ARR Affinity** is enabled.
@@ -20,6 +23,9 @@ pip install -r requirements.txt
 - `/orchestrator-azure-search-mongodb-memory` - a version of `/orchestrator-azure-search-redis-memory`, for long-term storage of chat messages. _(Observation: MongoDB is slower than Redis, but but I'm not certain if it's simply because of differences in pricing tier.)_
 - `/orchestrator-azure-search-chatmodelonly-mongodb-memory` - this version uses chat models only (`gpt-35-turbo`) because new Azure subscriptions can no longer get the older `text-davinci-003`.
 - `/orchestrator-azure-search-dbindex-mongodb-memory` - this version users a search index based on an Azure SQL table/view data source.
+
+### Web Apps
+- `/web-csvcharts` - the base version from Ngonidzashe Nzenze's [langchain_csv](https://github.com/Ngonie-x/langchain_csv), modified to use Azure OpenAI.
 
 ## Not Started / Work in Progress
 - No backlog for this folder at the moment.
