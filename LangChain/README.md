@@ -10,10 +10,11 @@ The python package dependencies are found in the `requirements.txt` of each resp
 pip install -r requirements.txt
 ```
 
-## Completed
-### Notebooks
+## Playground
 - `/notebooks` contain LangChain quickstarts and my own experimentation.
+- `/utilities` contain useful class utilities
 
+## Completed
 ### Orchestrators
 - `/orchestrator-completion-simple` is an orchestrator service app using the Completion API of Azure OpenAI `text-davinci-003`. This is the latest model in GA as of 2023-05-01.
 - `/orchestrator-chat-simple` is an orchestrator service using the Chat Completion API of Azure OpenAI `gpt-35-turbo` or `gpt-4`. These models are still in public preview and not recommended for production as of 2023-05-01.
