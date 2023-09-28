@@ -1,0 +1,7 @@
+load-dotenv==0.1.0
+langchain==0.0.285
+openai==0.27.4
+pandas==2.0.2
+pymssql==2.2.8
+python-dotenv==1.0.0
+streamlit==1.23.1
