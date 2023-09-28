@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import streamlit as st
 import pandas as pd
 import json
+import re
 
 from langchain.llms import AzureOpenAI
 
@@ -15,7 +16,7 @@ st.set_page_config(page_title="DB Copilot | RazType")
 ##########################################################################################
 # Functions
 ##########################################################################################
-def decode_response(response: str) -> dict:
+def DecodeResponse(response: str) -> dict:
     """This function converts the string response from the model to a dictionary object.
 
     Args:
@@ -24,10 +25,25 @@ def decode_response(response: str) -> dict:
     Returns:
         dict: dictionary with response data
     """
-    return json.loads(response)
+    for i in range(5): # try 5 times
+        try:
+            result = json.loads(response)   # try to parse...
+            return result
+        except Exception as e:
+            # "Expecting , delimiter: line 34 column 54 (char 1158)"
+            # position of unexpected character after '"'
+            unexp = int(re.findall(r'\(char (\d+)\)', str(e))[0])
+            # position of unescaped '"' before that
+            unesc = response.rfind(r'"', 0, unexp)
+            response = response[:unesc] + r'\"' + response[unesc+1:]
+            # position of correspondig closing '"' (+2 for inserted '\')
+            closg = response.find(r'"', unesc + 2)
+            response = response[:closg] + r'\"' + response[closg+1:]
+
+    raise Exception("Failed to decode response after 5 attempts.")
 
 
-def write_response(response_dict: dict):
+def WriteResponse(response_dict: dict):
     """
     Write a response from an agent to a Streamlit app.
 
@@ -93,8 +109,5 @@ query = st.text_area("What do you want to ask?")
 if st.button("Submit Query", type="primary"):
     response = dbagent.Query(query=query)
 
-    #decoded_response = decode_response(response)
-    #write_response(decoded_response)
-    st.write(response)
-
-
+    decoded_response = DecodeResponse(response)
+    WriteResponse(decoded_response)
