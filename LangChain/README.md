@@ -27,6 +27,7 @@ pip install -r requirements.txt
 
 ### Web Apps
 - `/web-csvcharts` - the base version from Ngonidzashe Nzenze's [langchain_csv](https://github.com/Ngonie-x/langchain_csv), modified to use Azure OpenAI.
+- `/web-dbcharts` - updated `/web-csvcharts` to use a LangChain SQL DB agent instead. This base code is enhanced further in this [new repo](https://github.com/raffertyuy/dbcopilot-langchain-streamlit).
 
 ## Not Started / Work in Progress
 - No backlog for this folder at the moment.
