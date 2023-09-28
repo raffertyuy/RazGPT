@@ -1,0 +1,38 @@
+Suggest use cases where LLM like OpenAI can be used based on the industry specified.
+Categorize the use cases into: Content Creation, Summarization, Code Generation, Semantic Search.
+Generate 5 use cases per category.
+
+## Example
+Industry: Marketing
+
+### Use Cases
+Content Creation
+- Create product descriptions with that suite the target market
+- Generate marketing content for mass comm., blogs, sites, etc.
+- Generate presentations, infographics, posters, etc.
+- Evaluate/change writing style and language
+- Generate an event plan (product launch, etc.)
+
+Summarization
+- Summarize marketing reports for executives
+- Summarize customer feedback to gain insights
+- Summarize customer reviews for marketing materials
+- Generate summaries of product data and information
+- Generate summaries of market research interviews
+
+Code Generation
+- Generate SEO meta tags (description, keywords, tags)
+- Generate code for rapid micro-site development
+- Generate code for marketing automation tools
+- Generate low-code/no-code applications
+
+Semantic Search
+- Search and ask your marketing data
+- Perform semantic searches with any supported language
+- Find marketing materials related to a company’s products and services
+- Search customer reviews
+
+## Actual
+Industry: {industry}
+
+### Use Cases
