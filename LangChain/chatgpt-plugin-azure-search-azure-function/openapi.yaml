@@ -1,0 +1,66 @@
+openapi: 3.1.0
+info:
+  title: RAG Plugin
+  description: A plugin for answering questions using RAG (Retrieve, Augment, Generate) on data indexed by Azure AI Search.
+  version: 'v1'
+servers:
+  - url: http://localhost:7071
+paths:
+  /ask:
+    post:
+      operationId: askFunction
+      description: |
+        Ask a question to the indexed information.
+        e.g. {"query": "<question to ask>", "chathistory": "<chat history or conversation context>", "searchindex": "<Azure AI search index name to query>"}
+        Only the query parameter is required. e.g. {"query": "What is the capital of France?"}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/askFunctionRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /summarizechat:
+    post:
+      operationId: summarizeChatFunction
+      description: |
+        Summarize the conversation between two or more personas.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/summarizeChatFunctionRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    askFunctionRequest:
+      type: object
+      properties:
+        query:
+          type: string
+        chathistory:
+          type: string
+        searchindex:
+          type: string
+      required:
+        - message
+    summarizeChatFunctionRequest:
+      type: object
+      properties:
+        chathistory:
+          type: string
+      required:
+        - chathistory

@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "RAG Plugin",
+  "name_for_model": "RAGPlugin",
+  "description_for_human": "Answer questions using RAG (Retrieve, Augment, Generate) on data indexed by Azure AI Search.",
+  "description_for_model": "Answer questions using RAG (Retrieve, Augment, Generate) on data indexed by Azure AI Search.",
+  "auth": {
+      "type": "none"
+  },
+  "api": {
+      "type": "openapi",
+      "url": "http://localhost:7071/openapi.yaml"
+  },
+  "logo_url": "http://localhost:7071/logo.png",
+  "contact_email": "legal@example.com",
+  "legal_info_url": "http://example.com/legal"
+}
