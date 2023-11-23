@@ -27,7 +27,19 @@ These are orchestrator services that are incrementally improved. Separate folder
 7. `/orchestrator-azure-search-chatmodelonly-mongodb-memory` - this version uses chat models only (`gpt-35-turbo`) because new Azure subscriptions can no longer get the older `text-davinci-003`.
 8. `/orchestrator-azure-search-dbindex-mongodb-memory` - this version users a search index based on an Azure SQL table/view data source.
 9. `/orchestrator-azure-search-azure-function` - modified to use Azure Functions.
-10. `/orchestrator-azure-search-azure-function-chatgpt-plugin` - modified to OpenAI ChatGPT Plugin standards, deployed to Azure Functions. Since this is a plugin, chat history/context is passed in the body instead of being kept track separately.
+
+### ChatGPT Plugins
+-. `/chatgpt-plugin-azure-search-azure-function` - modified to OpenAI ChatGPT Plugin standards, deployed to Azure Functions. Since this is a plugin, chat history is removed. The main app takes care of the history and passes the appropriate question to this plugin. Here is a sample metaprompt:
+```
+Assistant helps users answer questions about what is available in the internal data sources using the ChatGPT plugins available.
+
+Answer ONLY with the information returned by the plugins. If there isn't enough information, say you don't know. Do not generate answers that don't use the plugins below. If asking a clarifying question to the user would help, ask the question.
+
+Plugins available:
+- RAG Plugin: A plugin that answers questions.
+
+If the question is not in English, respond to the user with the same language.
+```
 
 ### Web Apps
 - `/web-csvcharts` - the base version from Ngonidzashe Nzenze's [langchain_csv](https://github.com/Ngonie-x/langchain_csv), modified to use Azure OpenAI.
