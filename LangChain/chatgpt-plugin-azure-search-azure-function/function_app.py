@@ -64,12 +64,10 @@ def ask(req: func.HttpRequest) -> func.HttpResponse:
     
     request_data = req.get_json()
     query = request_data['query']
-    chathistory = request_data.get('chathistory', "")
-    searchindex = request_data.get('searchindex', AZURE_SEARCH_INDEX_NAME)
     
     searchclient = SearchClient(
         endpoint=AZURE_SEARCH_SERVICE_ENDPOINT,
-        index_name=searchindex,
+        index_name=AZURE_SEARCH_INDEX_NAME,
         credential=azure_credential)
         #credential=AzureKeyCredential(os.environ["AZURE_SEARCH_SERVICE_KEY"]))        
     
@@ -82,9 +80,8 @@ def ask(req: func.HttpRequest) -> func.HttpResponse:
         
     # STEP 1: Rephrase Search Query
     searchquery = SearchUtil.RephraseQuery(
-        query,
-        chathistory,
-        chatLLM)
+        question=query,
+        chatLLM=chatLLM)
     
     logging.info(f'STEP 1: Rephrased query "{query}" to "{searchquery}"')
     
@@ -99,7 +96,7 @@ def ask(req: func.HttpRequest) -> func.HttpResponse:
     # STEP 3: Answer the Question
     logging.info('STEP 3: RAG answering the question')
     
-    systemprompt = Prompts.CHAT_SYSTEMPROMPT.format(sources=searchresults, chat_history=chathistory)
+    systemprompt = Prompts.CHAT_SYSTEMPROMPT.format(sources=searchresults)
     chatprompt = ChatPromptTemplate.from_messages([
         SystemMessagePromptTemplate.from_template(systemprompt),
         HumanMessagePromptTemplate.from_template("{input}")
@@ -111,7 +108,6 @@ def ask(req: func.HttpRequest) -> func.HttpResponse:
         total_tokens = cb.total_tokens
 
         del searchclient
-        del chathistory
         del query
         del searchquery
         del searchresults
@@ -125,25 +121,6 @@ def ask(req: func.HttpRequest) -> func.HttpResponse:
             }),
             mimetype="application/json"
         )
-        
-@app.route(route="summarizechat", methods=["POST"])
-def summarize_chat(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('summarizechat HTTP trigger function processed a request.')
-    
-    request_data = req.get_json()
-    chathistory = request_data['chathistory']
-    
-    if not chathistory:
-        return func.HttpResponse(
-            json.dumps({"error": "chathistory is required"}),
-            status_code=400,
-            mimetype="application/json"
-        )
-        
-    prompt = Prompts.SUMMARIZE_SYSTEMPROMPT.format(chat_history=chathistory)
-    summary = chatLLM([HumanMessage(content=prompt)]).content
-        
-    return func.HttpResponse(summary, mimetype="text/plain")
 
 @app.route(".well-known/ai-plugin.json", methods=["GET"])
 def get_ai_plugin(req: func.HttpRequest) -> func.HttpResponse:

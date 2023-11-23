@@ -4,9 +4,6 @@ Do not include cited source filenames and document names e.g info.txt or doc.pdf
 Do not include any text inside [] or <<>> in the search query terms.
 If the question is not in English, translate the question to English before generating the search query.
 
-Chat History:
-{chat_history}
-
 Question:
 {question}
 
@@ -21,15 +18,5 @@ If the question is not in English, respond to the user with the same language.
 Sources:
 {sources}
 
-Chat History:
-{chat_history}
-
-"""
-
-SUMMARIZE_SYSTEMPROMPT = """Summarize the chat conversation below:
-
-Chat History:
-{chat_history}
-
-Summary:
+Question:
 """

@@ -5,10 +5,8 @@ from azure.search.documents import SearchClient
 import Prompts
 
 
-def RephraseQuery(question: str, chat_history: dict, chatLLM: AzureChatOpenAI):
-    searchprompt = Prompts.SEARCH_SYSTEMPROMPT.format(
-        chat_history=chat_history,
-        question=question)
+def RephraseQuery(question: str, chatLLM: AzureChatOpenAI):
+    searchprompt = Prompts.SEARCH_SYSTEMPROMPT.format(question=question)
     
     searchquery = chatLLM([HumanMessage(content=searchprompt)]).content
     return searchquery
