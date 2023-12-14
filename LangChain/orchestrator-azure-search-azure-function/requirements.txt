@@ -2,7 +2,7 @@ azure-core==1.26.4
 azure-functions==1.17.0
 azure-identity==1.13.0
 azure-search-documents==11.3.0
-langchain==0.0.245
+langchain==0.0.329
 openai==0.27.8
 load-dotenv==0.1.0
 python-dotenv==1.0.0
