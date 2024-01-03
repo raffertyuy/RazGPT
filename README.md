@@ -24,8 +24,9 @@ If you'd like to learn more, please check [my series of blog posts](https://www.
 4. [Azure OpenAI on Your Data Web Application](https://github.com/microsoft/sample-app-aoai-chatGPT): This is the code that is deployed by [Azure OpenAI on your Data](https://learn.microsoft.com/en-us/azure/ai-services/openai/use-your-data-quickstart?tabs=command-line%2Cpython&pivots=programming-language-studio)
 5. [Chat with Your Data (Solution Accelerator)](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator): similar to #1, but has a UI/UX for the admin page.
 6. [Chatbot UI](https://github.com/mckaywrigley/chatbot-ui): A basic ChatGPT UI implementation. This is not by Microsoft but I really like this one.
-7. [Enterprise RAG](https://github.com/Azure/GPT-RAG/): This solution accelerator uses private endpoints and private links, for enterprises with network hardening requirements. 
-8. [PubSec Info Assistant](https://github.com/microsoft/PubSec-Info-Assistant)
-9. [Semantic Kernel Chat Copilot](https://github.com/microsoft/chat-copilot): The official Semantic Kernel ChatGPT application. Read more [here](https://learn.microsoft.com/en-us/semantic-kernel/chat-copilot/).
+7. [Enterprise RAG](https://github.com/Azure/GPT-RAG/): This solution accelerator uses private endpoints and private links, for enterprises with network hardening requirements.
+8. [LibreChat](https://docs.librechat.ai/): Open-source clone of ChatGPT. Looks promising, but I haven't tried it yet.
+9. [PubSec Info Assistant](https://github.com/microsoft/PubSec-Info-Assistant)
+10. [Semantic Kernel Chat Copilot](https://github.com/microsoft/chat-copilot): The official Semantic Kernel ChatGPT application. Read more [here](https://learn.microsoft.com/en-us/semantic-kernel/chat-copilot/).
 
 I wrote about some of the above in this [blog post](https://www.raffertyuy.com/raztype/azure-openai-starters/).
