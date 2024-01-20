@@ -11,6 +11,7 @@ If you'd like to learn more, please check [my series of blog posts](https://www.
 - [LangChain (GitHub)](https://github.com/hwchase17/langchain)
 - [LangChain (Python)](https://python.langchain.com/docs/get_started/introduction)
 - [LangChain (JS)](https://js.langchain.com/docs/get_started/introduction)
+- [LiteLLM](https://litellm.ai)
 - [Llama Index](https://github.com/run-llama/llama_index)
 - [OpenAI API Reference](https://platform.openai.com/docs/api-reference/introduction)
 - [OpenAI SDK Reference](https://platform.openai.com/docs/libraries/python-library)
