@@ -1,0 +1,94 @@
+You are provided with an image with a workflow diagram for a ticketing system.
+
+The diagram provided will have boxes and arrows.
+- The text in the boxes indicate the state of the ticket.
+- The arrows indicate the transition of the ticket from one state to another.
+
+Validate if the workflow is technically feasible given the ticketing system constraints below.
+The following are the system constraints that is possible to implement.
+
+## Ticket object components
+- {state} - the current state of the ticket
+- {field} - A ticket has multiple fields, each field has a name and a value
+- {value} - the value of the field
+- {user_group_name} - the name of the user group
+
+## State and Value Condition System Constraints
+
+### COMMON_STATE_CONDITIONS
+1. If a ticket is created
+2. If a ticket state is not changed
+3. If a ticket state changes from {state} to {state}
+4. If a ticket state is {state}
+
+### VALUE_CONDITIONS
+- If the value of {field} equals {value}
+- If the value of {field} does not equal {value}
+- If a value is defined for {field}
+- If no value is defined for {field}
+- If a change was made to the value of {field}
+- If no change was made to the value of {field}
+
+### SINGLE_STATE_CONDITIONS
+- If a ticket state changes to {state}
+- If a ticket state is not {state}
+
+### VALUE_ACTIONS
+- Clear the value of {field}
+- Copy the value from {field} to {field}
+- Make {field} read-only
+- Make {field} required
+- Set the value of {field} to {value}
+- Use the current time to set the value of {field}
+- Use the current user to set the value of {field}
+
+### Additional Constraints for State and Value Conditions
+- COMMON_STATE_CONDITIONS can be combined with VALUE_CONDITIONS. For example `If a ticket is created` AND `If a value is defined for {field}`, then VALUE_ACTIONS
+- COMMON_STATE_CONDITIONS cannot be combined with another COMMON_STATE_CONDITIONS.
+- VALUE_CONDITIONS can be combined with COMMON_STATE_CONDITIONS. For example `If a value is defined for {field}` AND `If a ticket is created`, then VALUE_ACTIONS
+- VALUE_CONDITIONS cannot be combined with another VALUE_CONDITIONS.
+- SINGLE_STATE_CONDITIONS cannot be combined with any other conditions. For example `If a ticket state changes to {state}` only.
+- COMMON_STATE_CONDITIONS are followed by a VALUE_ACTIONS.
+- COMMON_STATE_CONDITIONS and VALUE_CONDITIONS are followed by a VALUE_ACTIONS.
+- SINGLE_STATE_CONDITIONS are followed by a VALUE_ACTIONS.
+- There is no OR condition in multiple conditions. Only AND conditions. For example `If ...` AND `If ...`, but not `If ...` OR `If ...`.
+
+### Special State Condition and Action
+The following state condition can only be followed by 1 action.
+- Condition: If a ticket state moved from {state}
+- Action: Restrict the transition to {state}
+
+
+## User Membership Condition System Constraints
+
+### USER_MEMBERSHIP_CONDITIONS
+- If the current user is a member of {user_group_name}
+- If the current user is not a member of {user_group_name}
+
+### USER_MEMBERSHIP_SINGLE_ACTIONS
+- Hide the {field}
+- Make the {field} read-only
+- Make the {field} required
+
+### USER_MEMBERSHIP_MULTI_ACTIONS
+- Restrict the transition to {state}
+
+### Additional Constraints for User Membership Conditions
+- USER_MEMBERSHIP_CONDITIONS cannot be combined with any other conditions. It is a single condition.
+- Each USER_MEMBERSHIP_CONDITIONS is followed by a USER_MEMBERSHIP_SINGLE_ACTIONS or USER_MEMBERSHIP_MULTI_ACTIONS.
+- If a USER_MEMBERSHIP_SINGLE_ACTIONS is used, it can only be followed by a USER_MEMBERSHIP_MULTI_ACTIONS.
+- If a USER_MEMBERSHIP_MULTI_ACTIONS is used, it can be followed by 1 or more additional USER_MEMBERSHIP_MULTI_ACTIONS.
+- If a USER_MEMBERSHIP_MULTI_ACTIONS is used, it can be followed by a single USER_MEMBERSHIP_SINGLE_ACTIONS and 1 or more additional USER_MEMBERSHIP_MULTI_ACTIONS.
+
+
+## Additional Instructions
+Validate if the provided workflow diagram is technically feasible given the system constraints above.
+
+Here are some actual constraint examples based on the constraints above:
+- If state "open" only points to a single destination state "In Progress", then this is possible with condition `If a ticket state moved from {state}`
+- But if state "Open" points to multiple destination states, then this is not possible. This is because
+  - When using the condition `If a ticket state moved from {state}`, it can only be followed by 1 action `Restrict the transition to {state}`. And you can only select 1 state.
+  - There is no condition `If a ticket is moving to {state}` available above.
+
+Think step by step. Explain your reasoning.
+Re-validate your answer.
