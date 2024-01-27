@@ -1,4 +1,4 @@
-@workspace /new Scaffold a new ReactJS application that does the following:
+@workspace /new Scaffold a new ReactTS application that does the following:
 
 ## Frontend
 - A front page with the title "Azure OpenAI Demo Application"
