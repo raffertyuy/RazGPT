@@ -1,4 +1,4 @@
-Generate an OpenAPI Spec YAML for purchase items and orders.
+Generate Java classes for purchase items and orders.
 
 ## Order Fields
 - List of line items to reference the order
