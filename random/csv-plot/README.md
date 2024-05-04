@@ -5,6 +5,8 @@ This is a simple experiment for how an AI Engineer can use GitHub Copilot in wri
 2. Generate a Streamlit application based on the Jupyter Notebook.
 3. Used GitHub Copilot to fix a warning message in the Streamlit application.
 
+Also see this [blog post](https://raffertyuy.com/raztype/ghcp-jupyter/).
+
 ## Jupyter Notebook
 `notebook.ipynb` was generated using the following prompt
 ```
