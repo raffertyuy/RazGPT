@@ -6,7 +6,7 @@ Target Audience: Technical professionals such as CTO, CIO, enterprise architects
 Call out mistakes such as:
 - Typographical errors
 - Grammatical errors
-- Inconsistent verb tens
+- Inconsistent verb tense
 
 Give suggestions for improvement so that the writing is succinct, clear, and easy to understand.
 

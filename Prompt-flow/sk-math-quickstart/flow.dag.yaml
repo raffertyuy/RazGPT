@@ -1,0 +1,22 @@
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  text:
+    type: string
+    default: ""
+outputs:
+  result:
+    type: string
+    reference: ${math_planner.output}
+nodes:
+- name: math_planner
+  type: python
+  source:
+    type: code
+    path: math_planner.py
+  inputs:
+    input: What is 5.1+3.2?
+    deployment_type: text-completion
+    deployment_name: gpt35instruct
+    AzureOpenAIConnection: razopenai-sc

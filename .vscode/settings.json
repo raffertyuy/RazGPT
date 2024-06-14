@@ -10,5 +10,6 @@
     "dotnet.defaultSolution": "SemanticKernel/orchestrator-dotnet/Orchestrator.sln",
     "dataworkspace.excludedProjects": [
         "northwindtraders/northwindtraders.sqlproj"
-    ]
+    ],
+    "python.terminal.activateEnvironment": true
 }

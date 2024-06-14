@@ -1,7 +1,9 @@
 # Demo Application
 
 ## Class Diagram
-Below is the class diagram of our demo application.
+Below is the class diagram of our demo application that represents orders.
+
+This is for an e-commerce site.
 
 ```mermaid
 classDiagram
