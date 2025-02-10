@@ -1,0 +1,1 @@
+This folder contains the resources created by following the tutorial in https://learn.microsoft.com/en-us/azure/ai-studio/tutorials/copilot-sdk-create-resources?tabs=windows
